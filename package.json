@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "node ./bin/main.js",
-    "clean": "rm -rf ./lib",
+    "clean": "rmdir /Q /S lib",
     "watchful": "watchful -mp=4 --transpiler=babel --bundler=browserify --source-directory=./src --lib-directory=./lib --entry-file=example.js --bundle-file=./example.js --pause=100",
     "batch": "npm run watchful batch --",
     "batch-debug": "npm run watchful batch -- --debug",
