@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/example.js"],
+  "sourcesContent": ["\"use strict\";\n\nconsole.log(\"Muon!\")"],
+  "mappings": ";;;AAEA,UAAQ,IAAG;",
+  "names": []
+}
