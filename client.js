@@ -22536,8 +22536,62 @@
     });
   });
 
-  // lib/view.js
-  var require_view = __commonJS((exports) => {
+  // lib/colours.js
+  var require_colours = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.plainRed = exports.lightGrey = exports.plainBlack = exports.plainWhite = void 0;
+    var plainWhite = "#ffffff";
+    exports.plainWhite = plainWhite;
+    var lightGrey = "#c0c0c0";
+    exports.lightGrey = lightGrey;
+    var plainBlack = "#000000";
+    exports.plainBlack = plainBlack;
+    var plainRed = "#ff0000";
+    exports.plainRed = plainRed;
+  });
+
+  // lib/constants.js
+  var require_constants6 = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.BOARD_SIZE = exports.LEFT = exports.TOP = void 0;
+    var TOP = "top";
+    exports.TOP = TOP;
+    var LEFT = "left";
+    exports.LEFT = LEFT;
+    var BOARD_SIZE = 8;
+    exports.BOARD_SIZE = BOARD_SIZE;
+  });
+
+  // lib/styles.js
+  var require_styles2 = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.squareDivHeight = exports.boardDivWidth = exports.boardDivSize = exports.squareDivSize = exports.boardDivHeight = exports.squareDivWidth = void 0;
+    var _constants = require_constants6();
+    var squareDivSize = 6;
+    exports.squareDivSize = squareDivSize;
+    var boardDivSize = squareDivSize * _constants.BOARD_SIZE;
+    exports.boardDivSize = boardDivSize;
+    var boardDivWidth = "".concat(boardDivSize, "rem");
+    exports.boardDivWidth = boardDivWidth;
+    var boardDivHeight = "".concat(boardDivSize, "rem");
+    exports.boardDivHeight = boardDivHeight;
+    var squareDivWidth = "".concat(squareDivSize, "rem");
+    exports.squareDivWidth = squareDivWidth;
+    var squareDivHeight = "".concat(squareDivSize, "rem");
+    exports.squareDivHeight = squareDivHeight;
+  });
+
+  // lib/view/div/square.js
+  var require_square = __commonJS((exports) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
       value: true
@@ -22545,6 +22599,474 @@
     exports.default = void 0;
     var _easyWithStyle2 = _interopRequireDefault2(require_lib7());
     var _easy2 = require_lib();
+    var _colours = require_colours();
+    var _constants = require_constants6();
+    var _styles = require_styles2();
+    function _arrayWithHoles(arr) {
+      if (Array.isArray(arr))
+        return arr;
+    }
+    function _assertThisInitialized(self) {
+      if (self === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+      return self;
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function isNativeReflectConstruct() {
+      if (typeof Reflect === "undefined" || !Reflect.construct)
+        return false;
+      if (Reflect.construct.sham)
+        return false;
+      if (typeof Proxy === "function")
+        return true;
+      try {
+        Date.prototype.toString.call(Reflect.construct(Date, [], function() {
+        }));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    function _construct(Parent, args, Class) {
+      if (isNativeReflectConstruct()) {
+        _construct = Reflect.construct;
+      } else {
+        _construct = function _construct2(Parent2, args2, Class2) {
+          var a = [
+            null
+          ];
+          a.push.apply(a, args2);
+          var Constructor = Function.bind.apply(Parent2, a);
+          var instance = new Constructor();
+          if (Class2)
+            _setPrototypeOf(instance, Class2.prototype);
+          return instance;
+        };
+      }
+      return _construct.apply(null, arguments);
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+      return obj;
+    }
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf2(o2) {
+        return o2.__proto__ || Object.getPrototypeOf(o2);
+      };
+      return _getPrototypeOf(o);
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+          value: subClass,
+          writable: true,
+          configurable: true
+        }
+      });
+      if (superClass)
+        _setPrototypeOf(subClass, superClass);
+    }
+    function _interopRequireDefault2(obj) {
+      return obj && obj.__esModule ? obj : {
+        default: obj
+      };
+    }
+    function _isNativeFunction(fn) {
+      return Function.toString.call(fn).indexOf("[native code]") !== -1;
+    }
+    function _iterableToArrayLimit(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = void 0;
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+          if (i && _arr.length === i)
+            break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"] != null)
+            _i["return"]();
+        } finally {
+          if (_d)
+            throw _e;
+        }
+      }
+      return _arr;
+    }
+    function _nonIterableRest() {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    }
+    function _possibleConstructorReturn(self, call) {
+      if (call && (_typeof(call) === "object" || typeof call === "function")) {
+        return call;
+      }
+      return _assertThisInitialized(self);
+    }
+    function _setPrototypeOf(o, p) {
+      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf2(o2, p2) {
+        o2.__proto__ = p2;
+        return o2;
+      };
+      return _setPrototypeOf(o, p);
+    }
+    function _slicedToArray(arr, i) {
+      return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+    }
+    function _taggedTemplateLiteral(strings, raw) {
+      if (!raw) {
+        raw = strings.slice(0);
+      }
+      return Object.freeze(Object.defineProperties(strings, {
+        raw: {
+          value: Object.freeze(raw)
+        }
+      }));
+    }
+    var _typeof = function(obj) {
+      return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+    function _wrapNativeSuper(Class) {
+      var _cache = typeof Map === "function" ? new Map() : void 0;
+      _wrapNativeSuper = function _wrapNativeSuper2(Class2) {
+        if (Class2 === null || !_isNativeFunction(Class2))
+          return Class2;
+        if (typeof Class2 !== "function") {
+          throw new TypeError("Super expression must either be null or a function");
+        }
+        if (typeof _cache !== "undefined") {
+          if (_cache.has(Class2))
+            return _cache.get(Class2);
+          _cache.set(Class2, Wrapper);
+        }
+        function Wrapper() {
+          return _construct(Class2, arguments, _getPrototypeOf(this).constructor);
+        }
+        Wrapper.prototype = Object.create(Class2.prototype, {
+          constructor: {
+            value: Wrapper,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }
+        });
+        return _setPrototypeOf(Wrapper, Class2);
+      };
+      return _wrapNativeSuper(Class);
+    }
+    function _templateObject() {
+      var data = _taggedTemplateLiteral([
+        "\n\n  width: ",
+        ";\n  height: ",
+        ";\n  position: absolute;\n  \n  :hover {\n    border: 2px solid ",
+        ";\n  }\n      \n"
+      ]);
+      _templateObject = function _templateObject2() {
+        return data;
+      };
+      return data;
+    }
+    var SquareDiv = function(Element1) {
+      _inherits(SquareDiv2, _easy2.Element);
+      function SquareDiv2() {
+        _classCallCheck(this, SquareDiv2);
+        return _possibleConstructorReturn(this, _getPrototypeOf(SquareDiv2).apply(this, arguments));
+      }
+      _createClass(SquareDiv2, [
+        {
+          key: "didMount",
+          value: function didMount() {
+            var _properties = this.properties, position = _properties.position, _position = _slicedToArray(position, 2), x = _position[0], y = _position[1], top = "".concat((_constants.BOARD_SIZE - 1 - y) * _styles.squareDivSize, "rem"), left = "".concat(x * _styles.squareDivSize, "rem");
+            this.style(_constants.TOP, top);
+            this.style(_constants.LEFT, left);
+          }
+        },
+        {
+          key: "willUnmount",
+          value: function willUnmount() {
+          }
+        }
+      ]);
+      return SquareDiv2;
+    }(_wrapNativeSuper(_easy2.Element));
+    _defineProperty(SquareDiv, "tagName", "div");
+    _defineProperty(SquareDiv, "defaultProperties", {
+      className: "square"
+    });
+    var _default = _easyWithStyle2.default(SquareDiv)(_templateObject(), _styles.squareDivWidth, _styles.squareDivHeight, _colours.plainRed);
+    exports.default = _default;
+  });
+
+  // lib/view/div/square/black.js
+  var require_black = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _easyWithStyle2 = _interopRequireDefault2(require_lib7());
+    var _square = _interopRequireDefault2(require_square());
+    var _colours = require_colours();
+    function _assertThisInitialized(self) {
+      if (self === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+      return self;
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+      return obj;
+    }
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf2(o2) {
+        return o2.__proto__ || Object.getPrototypeOf(o2);
+      };
+      return _getPrototypeOf(o);
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+          value: subClass,
+          writable: true,
+          configurable: true
+        }
+      });
+      if (superClass)
+        _setPrototypeOf(subClass, superClass);
+    }
+    function _interopRequireDefault2(obj) {
+      return obj && obj.__esModule ? obj : {
+        default: obj
+      };
+    }
+    function _possibleConstructorReturn(self, call) {
+      if (call && (_typeof(call) === "object" || typeof call === "function")) {
+        return call;
+      }
+      return _assertThisInitialized(self);
+    }
+    function _setPrototypeOf(o, p) {
+      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf2(o2, p2) {
+        o2.__proto__ = p2;
+        return o2;
+      };
+      return _setPrototypeOf(o, p);
+    }
+    function _taggedTemplateLiteral(strings, raw) {
+      if (!raw) {
+        raw = strings.slice(0);
+      }
+      return Object.freeze(Object.defineProperties(strings, {
+        raw: {
+          value: Object.freeze(raw)
+        }
+      }));
+    }
+    var _typeof = function(obj) {
+      return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+    function _templateObject() {
+      var data = _taggedTemplateLiteral([
+        "\n\n  background-color: ",
+        ";\n      \n"
+      ]);
+      _templateObject = function _templateObject2() {
+        return data;
+      };
+      return data;
+    }
+    var BlackSquareDiv = function(SquareDiv) {
+      _inherits(BlackSquareDiv2, _square.default);
+      function BlackSquareDiv2() {
+        _classCallCheck(this, BlackSquareDiv2);
+        return _possibleConstructorReturn(this, _getPrototypeOf(BlackSquareDiv2).apply(this, arguments));
+      }
+      return BlackSquareDiv2;
+    }(_square.default);
+    _defineProperty(BlackSquareDiv, "defaultProperties", {
+      className: "black"
+    });
+    var _default = _easyWithStyle2.default(BlackSquareDiv)(_templateObject(), _colours.plainBlack);
+    exports.default = _default;
+  });
+
+  // lib/view/div/square/white.js
+  var require_white = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _easyWithStyle2 = _interopRequireDefault2(require_lib7());
+    var _square = _interopRequireDefault2(require_square());
+    var _colours = require_colours();
+    function _assertThisInitialized(self) {
+      if (self === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+      return self;
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+      return obj;
+    }
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf2(o2) {
+        return o2.__proto__ || Object.getPrototypeOf(o2);
+      };
+      return _getPrototypeOf(o);
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+          value: subClass,
+          writable: true,
+          configurable: true
+        }
+      });
+      if (superClass)
+        _setPrototypeOf(subClass, superClass);
+    }
+    function _interopRequireDefault2(obj) {
+      return obj && obj.__esModule ? obj : {
+        default: obj
+      };
+    }
+    function _possibleConstructorReturn(self, call) {
+      if (call && (_typeof(call) === "object" || typeof call === "function")) {
+        return call;
+      }
+      return _assertThisInitialized(self);
+    }
+    function _setPrototypeOf(o, p) {
+      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf2(o2, p2) {
+        o2.__proto__ = p2;
+        return o2;
+      };
+      return _setPrototypeOf(o, p);
+    }
+    function _taggedTemplateLiteral(strings, raw) {
+      if (!raw) {
+        raw = strings.slice(0);
+      }
+      return Object.freeze(Object.defineProperties(strings, {
+        raw: {
+          value: Object.freeze(raw)
+        }
+      }));
+    }
+    var _typeof = function(obj) {
+      return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+    function _templateObject() {
+      var data = _taggedTemplateLiteral([
+        "\n\n  background-color: ",
+        ";\n      \n"
+      ]);
+      _templateObject = function _templateObject2() {
+        return data;
+      };
+      return data;
+    }
+    var WhiteSquareDiv = function(SquareDiv) {
+      _inherits(WhiteSquareDiv2, _square.default);
+      function WhiteSquareDiv2() {
+        _classCallCheck(this, WhiteSquareDiv2);
+        return _possibleConstructorReturn(this, _getPrototypeOf(WhiteSquareDiv2).apply(this, arguments));
+      }
+      return WhiteSquareDiv2;
+    }(_square.default);
+    _defineProperty(WhiteSquareDiv, "defaultProperties", {
+      className: "white"
+    });
+    var _default = _easyWithStyle2.default(WhiteSquareDiv)(_templateObject(), _colours.plainWhite);
+    exports.default = _default;
+  });
+
+  // lib/view/div/board.js
+  var require_board = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _easyWithStyle2 = _interopRequireDefault2(require_lib7());
+    var _easy2 = require_lib();
+    var _blackJs = _interopRequireDefault2(require_black());
+    var _whiteJs = _interopRequireDefault2(require_white());
     function _assertThisInitialized(self) {
       if (self === void 0) {
         throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -22703,7 +23225,224 @@
     }
     function _templateObject() {
       var data = _taggedTemplateLiteral([
-        "\n\n  display: grid;\n  min-height: 100vh;\n      \n"
+        "\n\n  position: relative;\n  grid-area: board-div;\n      \n"
+      ]);
+      _templateObject = function _templateObject2() {
+        return data;
+      };
+      return data;
+    }
+    var BoardDiv = function(Element1) {
+      _inherits(BoardDiv2, _easy2.Element);
+      function BoardDiv2() {
+        _classCallCheck(this, BoardDiv2);
+        return _possibleConstructorReturn(this, _getPrototypeOf(BoardDiv2).apply(this, arguments));
+      }
+      _createClass(BoardDiv2, [
+        {
+          key: "childElements",
+          value: function childElements() {
+            var squareDivs = [];
+            for (var y = 0; y <= 7; y++) {
+              for (var x = 0; x <= 7; x++) {
+                var black = (x + y) % 2 === 1, position = [
+                  x,
+                  y
+                ], SquareDiv = black ? _blackJs.default : _whiteJs.default, squareDiv = React.createElement(SquareDiv, {
+                  position
+                });
+                squareDivs.push(squareDiv);
+              }
+            }
+            var childElements1 = squareDivs;
+            return childElements1;
+          }
+        }
+      ]);
+      return BoardDiv2;
+    }(_wrapNativeSuper(_easy2.Element));
+    _defineProperty(BoardDiv, "tagName", "div");
+    _defineProperty(BoardDiv, "defaultProperties", {
+      className: "board"
+    });
+    var _default = _easyWithStyle2.default(BoardDiv)(_templateObject());
+    exports.default = _default;
+  });
+
+  // lib/view.js
+  var require_view = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _easyWithStyle2 = _interopRequireDefault2(require_lib7());
+    var _easy2 = require_lib();
+    var _board = _interopRequireDefault2(require_board());
+    var _colours = require_colours();
+    var _styles = require_styles2();
+    function _assertThisInitialized(self) {
+      if (self === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+      return self;
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function isNativeReflectConstruct() {
+      if (typeof Reflect === "undefined" || !Reflect.construct)
+        return false;
+      if (Reflect.construct.sham)
+        return false;
+      if (typeof Proxy === "function")
+        return true;
+      try {
+        Date.prototype.toString.call(Reflect.construct(Date, [], function() {
+        }));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    function _construct(Parent, args, Class) {
+      if (isNativeReflectConstruct()) {
+        _construct = Reflect.construct;
+      } else {
+        _construct = function _construct2(Parent2, args2, Class2) {
+          var a = [
+            null
+          ];
+          a.push.apply(a, args2);
+          var Constructor = Function.bind.apply(Parent2, a);
+          var instance = new Constructor();
+          if (Class2)
+            _setPrototypeOf(instance, Class2.prototype);
+          return instance;
+        };
+      }
+      return _construct.apply(null, arguments);
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+      return obj;
+    }
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf2(o2) {
+        return o2.__proto__ || Object.getPrototypeOf(o2);
+      };
+      return _getPrototypeOf(o);
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+          value: subClass,
+          writable: true,
+          configurable: true
+        }
+      });
+      if (superClass)
+        _setPrototypeOf(subClass, superClass);
+    }
+    function _interopRequireDefault2(obj) {
+      return obj && obj.__esModule ? obj : {
+        default: obj
+      };
+    }
+    function _isNativeFunction(fn) {
+      return Function.toString.call(fn).indexOf("[native code]") !== -1;
+    }
+    function _possibleConstructorReturn(self, call) {
+      if (call && (_typeof(call) === "object" || typeof call === "function")) {
+        return call;
+      }
+      return _assertThisInitialized(self);
+    }
+    function _setPrototypeOf(o, p) {
+      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf2(o2, p2) {
+        o2.__proto__ = p2;
+        return o2;
+      };
+      return _setPrototypeOf(o, p);
+    }
+    function _taggedTemplateLiteral(strings, raw) {
+      if (!raw) {
+        raw = strings.slice(0);
+      }
+      return Object.freeze(Object.defineProperties(strings, {
+        raw: {
+          value: Object.freeze(raw)
+        }
+      }));
+    }
+    var _typeof = function(obj) {
+      return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
+    function _wrapNativeSuper(Class) {
+      var _cache = typeof Map === "function" ? new Map() : void 0;
+      _wrapNativeSuper = function _wrapNativeSuper2(Class2) {
+        if (Class2 === null || !_isNativeFunction(Class2))
+          return Class2;
+        if (typeof Class2 !== "function") {
+          throw new TypeError("Super expression must either be null or a function");
+        }
+        if (typeof _cache !== "undefined") {
+          if (_cache.has(Class2))
+            return _cache.get(Class2);
+          _cache.set(Class2, Wrapper);
+        }
+        function Wrapper() {
+          return _construct(Class2, arguments, _getPrototypeOf(this).constructor);
+        }
+        Wrapper.prototype = Object.create(Class2.prototype, {
+          constructor: {
+            value: Wrapper,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }
+        });
+        return _setPrototypeOf(Wrapper, Class2);
+      };
+      return _wrapNativeSuper(Class);
+    }
+    function _templateObject() {
+      var data = _taggedTemplateLiteral([
+        "\n\n  display: grid;\n  min-height: 100vh;\n  background-color: ",
+        ";\n      \n  grid-template-rows: auto ",
+        " auto;\n  grid-template-columns: auto ",
+        ' auto;  \n  grid-template-areas:\n  \n           ". . ."\n    \n        ". board-div ."        \n    \n           ". . ."\n    \n  ;\n\n'
       ]);
       _templateObject = function _templateObject2() {
         return data;
@@ -22720,25 +23459,7 @@
         {
           key: "childElements",
           value: function childElements() {
-            var _properties = this.properties, childElements1 = _properties.childElements;
-            return [
-              React.createElement("div", null)
-            ];
-          }
-        },
-        {
-          key: "initialise",
-          value: function initialise() {
-            this.assignContext();
-          }
-        }
-      ], [
-        {
-          key: "fromClass",
-          value: function fromClass(Class, properties) {
-            var view2 = _easy2.Element.fromClass(Class, properties);
-            view2.initialise();
-            return view2;
+            return React.createElement(_board.default, null);
           }
         }
       ]);
@@ -22748,7 +23469,7 @@
     _defineProperty(View, "defaultProperties", {
       className: "view"
     });
-    var _default = _easyWithStyle2.default(View)(_templateObject());
+    var _default = _easyWithStyle2.default(View)(_templateObject(), _colours.lightGrey, _styles.boardDivWidth, _styles.boardDivHeight);
     exports.default = _default;
   });
 
