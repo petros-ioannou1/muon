@@ -6,7 +6,7 @@ const { createLiveReloadHandler } = require("lively-cli");
 
 const server = express(), ///
       staticRouter = express.static("."),
-      liveReloadHandler = createLiveReloadHandler("./example.js");
+      liveReloadHandler = createLiveReloadHandler("./client.js");
 
 server.use(staticRouter);
 
