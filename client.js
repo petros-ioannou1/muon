@@ -22536,23 +22536,6 @@
     });
   });
 
-  // lib/colours.js
-  var require_colours = __commonJS((exports) => {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-    exports.plainRed = exports.lightGrey = exports.plainBlack = exports.plainWhite = void 0;
-    var plainWhite = "#ffffff";
-    exports.plainWhite = plainWhite;
-    var lightGrey = "#c0c0c0";
-    exports.lightGrey = lightGrey;
-    var plainBlack = "#000000";
-    exports.plainBlack = plainBlack;
-    var plainRed = "#ff0000";
-    exports.plainRed = plainRed;
-  });
-
   // lib/constants.js
   var require_constants6 = __commonJS((exports) => {
     "use strict";
@@ -22590,6 +22573,101 @@
     exports.squareDivHeight = squareDivHeight;
   });
 
+  // lib/coordinates.js
+  var require_coordinates = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _constants = require_constants6();
+    var _styles = require_styles2();
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    var Coordinates = function() {
+      function Coordinates2(x, y) {
+        _classCallCheck(this, Coordinates2);
+        this.x = x;
+        this.y = y;
+      }
+      _createClass(Coordinates2, [
+        {
+          key: "getX",
+          value: function getX() {
+            return this.x;
+          }
+        },
+        {
+          key: "getY",
+          value: function getY() {
+            return this.y;
+          }
+        },
+        {
+          key: "getTop",
+          value: function getTop() {
+            var top = "".concat((_constants.BOARD_SIZE - 1 - this.y) * _styles.squareDivSize, "rem");
+            return top;
+          }
+        },
+        {
+          key: "getLeft",
+          value: function getLeft() {
+            var left = "".concat(this.x * _styles.squareDivSize, "rem");
+            return left;
+          }
+        }
+      ], [
+        {
+          key: "fromXAndY",
+          value: function fromXAndY(x, y) {
+            var coordinates = new Coordinates2(x, y);
+            return coordinates;
+          }
+        }
+      ]);
+      return Coordinates2;
+    }();
+    exports.default = Coordinates;
+  });
+
+  // lib/colours.js
+  var require_colours = __commonJS((exports) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.plainRed = exports.lightGrey = exports.plainBlack = exports.plainWhite = void 0;
+    var plainWhite = "#ffffff";
+    exports.plainWhite = plainWhite;
+    var lightGrey = "#c0c0c0";
+    exports.lightGrey = lightGrey;
+    var plainBlack = "#000000";
+    exports.plainBlack = plainBlack;
+    var plainRed = "#ff0000";
+    exports.plainRed = plainRed;
+  });
+
   // lib/view/div/square.js
   var require_square = __commonJS((exports) => {
     "use strict";
@@ -22602,10 +22680,6 @@
     var _colours = require_colours();
     var _constants = require_constants6();
     var _styles = require_styles2();
-    function _arrayWithHoles(arr) {
-      if (Array.isArray(arr))
-        return arr;
-    }
     function _assertThisInitialized(self) {
       if (self === void 0) {
         throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -22708,34 +22782,6 @@
     function _isNativeFunction(fn) {
       return Function.toString.call(fn).indexOf("[native code]") !== -1;
     }
-    function _iterableToArrayLimit(arr, i) {
-      var _arr = [];
-      var _n = true;
-      var _d = false;
-      var _e = void 0;
-      try {
-        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-          _arr.push(_s.value);
-          if (i && _arr.length === i)
-            break;
-        }
-      } catch (err) {
-        _d = true;
-        _e = err;
-      } finally {
-        try {
-          if (!_n && _i["return"] != null)
-            _i["return"]();
-        } finally {
-          if (_d)
-            throw _e;
-        }
-      }
-      return _arr;
-    }
-    function _nonIterableRest() {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
     function _possibleConstructorReturn(self, call) {
       if (call && (_typeof(call) === "object" || typeof call === "function")) {
         return call;
@@ -22748,9 +22794,6 @@
         return o2;
       };
       return _setPrototypeOf(o, p);
-    }
-    function _slicedToArray(arr, i) {
-      return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
     }
     function _taggedTemplateLiteral(strings, raw) {
       if (!raw) {
@@ -22815,7 +22858,7 @@
         {
           key: "didMount",
           value: function didMount() {
-            var _properties = this.properties, position = _properties.position, _position = _slicedToArray(position, 2), x = _position[0], y = _position[1], top = "".concat((_constants.BOARD_SIZE - 1 - y) * _styles.squareDivSize, "rem"), left = "".concat(x * _styles.squareDivSize, "rem");
+            var _properties = this.properties, coordinates = _properties.coordinates, top = coordinates.getTop(), left = coordinates.getLeft();
             this.style(_constants.TOP, top);
             this.style(_constants.LEFT, left);
           }
@@ -23065,6 +23108,7 @@
     exports.default = void 0;
     var _easyWithStyle2 = _interopRequireDefault2(require_lib7());
     var _easy2 = require_lib();
+    var _coordinates = _interopRequireDefault2(require_coordinates());
     var _blackJs = _interopRequireDefault2(require_black());
     var _whiteJs = _interopRequireDefault2(require_white());
     function _assertThisInitialized(self) {
@@ -23245,11 +23289,8 @@
             var squareDivs = [];
             for (var y = 0; y <= 7; y++) {
               for (var x = 0; x <= 7; x++) {
-                var black = (x + y) % 2 === 1, position = [
-                  x,
-                  y
-                ], SquareDiv = black ? _blackJs.default : _whiteJs.default, squareDiv = /* @__PURE__ */ React.createElement(SquareDiv, {
-                  position
+                var black = (x + y) % 2 === 1, coordinates = _coordinates.default.fromXAndY(x, y), SquareDiv = black ? _blackJs.default : _whiteJs.default, squareDiv = /* @__PURE__ */ React.createElement(SquareDiv, {
+                  coordinates
                 });
                 squareDivs.push(squareDiv);
               }

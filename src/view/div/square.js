@@ -5,15 +5,14 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 
 import { plainRed } from "../../colours";
-import { TOP, LEFT, BOARD_SIZE } from "../../constants";
-import { squareDivSize, squareDivWidth, squareDivHeight } from "../../styles";
+import { TOP, LEFT } from "../../constants";
+import { squareDivWidth, squareDivHeight } from "../../styles";
 
 class SquareDiv extends Element {
   didMount() {
-    const { position } = this.properties,
-          [ x, y ] = position,
-          top = `${((BOARD_SIZE - 1) - y) * squareDivSize}rem`,
-          left = `${x * squareDivSize}rem`;
+    const { coordinates } = this.properties,
+          top = coordinates.getTop(),
+          left = coordinates.getLeft();
 
     this.style(TOP, top);
     this.style(LEFT, left);
@@ -41,3 +40,4 @@ export default withStyle(SquareDiv)`
   }
       
 `;
+
