@@ -23248,7 +23248,7 @@
                 var black = (x + y) % 2 === 1, position = [
                   x,
                   y
-                ], SquareDiv = black ? _blackJs.default : _whiteJs.default, squareDiv = React.createElement(SquareDiv, {
+                ], SquareDiv = black ? _blackJs.default : _whiteJs.default, squareDiv = /* @__PURE__ */ React.createElement(SquareDiv, {
                   position
                 });
                 squareDivs.push(squareDiv);
@@ -23459,7 +23459,7 @@
         {
           key: "childElements",
           value: function childElements() {
-            return React.createElement(_board.default, null);
+            return /* @__PURE__ */ React.createElement(_board.default, null);
           }
         }
       ]);
@@ -23500,7 +23500,7 @@
   }
   var renderStyles = _easyWithStyle.default.renderStyles;
   var body = new _easy.Body();
-  var view = React.createElement(_view.default, null);
+  var view = /* @__PURE__ */ React.createElement(_view.default, null);
   var model = null;
   var scheduler = null;
   _sufficient.controller.assignMethods(_createMethods.default, scheduler, model, view);
