@@ -11,11 +11,11 @@ import { boardDivWidth, boardDivHeight } from "./styles";
 
 class View extends Element {
   childElements() {
-    return (
+    return ([
 
       <BoardDiv/>
 
-    );
+    ]);
   }
 
   static tagName = "div";

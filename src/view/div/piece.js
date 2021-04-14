@@ -4,12 +4,12 @@ import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
 
+import BlackKingSVG from "../svg/black/king";
 import positionMixins from "../../mixins/position";
 
-import { plainRed } from "../../colours";
-import { squareDivWidth, squareDivHeight } from "../../styles";
+import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
-class SquareDiv extends Element {
+class PieceDiv extends Element {
   didMount() {
     const { coordinates } = this.properties,
           top = coordinates.getTop(),
@@ -23,24 +23,27 @@ class SquareDiv extends Element {
     ///
   }
 
+  childElements() {
+    return (
+
+      <BlackKingSVG/>
+
+    );
+  }
+
   static tagName = "div";
 
   static defaultProperties = {
-    className: "square"
+    className: "piece"
   };
 }
 
-Object.assign(SquareDiv.prototype, positionMixins);
+Object.assign(PieceDiv.prototype, positionMixins);
 
-export default withStyle(SquareDiv)`
+export default withStyle(PieceDiv)`
 
-  width: ${squareDivWidth};
-  height: ${squareDivHeight};
+  width: ${pieceDivWidth};
+  height: ${pieceDivHeight};
   position: absolute;
   
-  :hover {
-    border: 2px solid ${plainRed};
-  }
-      
 `;
-
