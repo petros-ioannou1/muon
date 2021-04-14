@@ -4,7 +4,7 @@ import withStyle from "easy-with-style";  ///
 
 import SquareDiv from "../../div/square";
 
-import { plainWhite } from "../../../colours";
+import { lightBrown } from "../../../colours";
 
 class WhiteSquareDiv extends SquareDiv {
   static defaultProperties = {
@@ -14,6 +14,6 @@ class WhiteSquareDiv extends SquareDiv {
 
 export default withStyle(WhiteSquareDiv)`
 
-  background-color: ${plainWhite};
+  background-color: ${lightBrown};
       
 `;
