@@ -3,11 +3,11 @@
   "author": "Petros Ioannou",
   "version": "0.0.2",
   "license": "MIT, Anti-996",
-  "homepage": "https://github.com/petros-ioannou1/yapp",
+  "homepage": "https://github.com/petros-ioannou1/muon",
   "description": "Muon.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/petros-ioannou1/yapp"
+    "url": "https://github.com/petros-ioannou1/muon"
   },
   "dependencies": {
     "express": "^4.17.1",
