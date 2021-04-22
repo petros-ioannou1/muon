@@ -4,12 +4,12 @@ import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
 
-import BlackKingSVG from "../svg/black/king";
-import coordinatesMixins from "../../mixins/coordinates";
+import WhitePawnSVG from "../../svg/pawn/white";
+import coordinatesMixins from "../../../mixins/coordinates";
 
-import { pieceDivWidth, pieceDivHeight } from "../../styles";
+import { pieceDivWidth, pieceDivHeight } from "../../../styles";
 
-class PieceDiv extends Element {
+class WhitePawnDiv extends Element {
   didMount() {
     const { coordinates } = this.properties;
 
@@ -23,7 +23,7 @@ class PieceDiv extends Element {
   childElements() {
     return (
 
-      <BlackKingSVG/>
+      <WhitePawnSVG/>
 
     );
   }
@@ -31,13 +31,13 @@ class PieceDiv extends Element {
   static tagName = "div";
 
   static defaultProperties = {
-    className: "piece"
+    className: "white pawn"
   };
 }
 
-Object.assign(PieceDiv.prototype, coordinatesMixins);
+Object.assign(WhitePawnDiv.prototype, coordinatesMixins);
 
-export default withStyle(PieceDiv)`
+export default withStyle(WhitePawnDiv)`
 
   width: ${pieceDivWidth};
   height: ${pieceDivHeight};

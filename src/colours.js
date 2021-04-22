@@ -6,5 +6,3 @@ export const plainBlack = "#000000";
 
 export const darkBrown = "#B68435";
 export const lightBrown = "#EDDFC9";
-
-export const plainRed = "#ff0000";

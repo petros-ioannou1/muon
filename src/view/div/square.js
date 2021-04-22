@@ -6,7 +6,7 @@ import { Element } from "easy";
 
 import coordinatesMixins from "../../mixins/coordinates";
 
-import { plainRed, darkBrown, lightBrown } from "../../colours";
+import { darkBrown, lightBrown } from "../../colours";
 import { squareDivWidth, squareDivHeight } from "../../styles";
 
 class SquareDiv extends Element {
@@ -14,7 +14,7 @@ class SquareDiv extends Element {
     const { coordinates } = this.properties,
           x = coordinates.getX(),
           y = coordinates.getY(),
-          black = ((x + y) % 2) === 1;
+          black = ((x + y) % 2) === 0;
 
     black ?
       this.addClass("black") :
@@ -50,9 +50,5 @@ export default withStyle(SquareDiv)`
     background-color: ${lightBrown};
   }
   
-  :hover {
-    border: 2px solid ${plainRed};
-  }
-      
 `;
 

@@ -18,6 +18,7 @@ const BlackKingSVG = (properties) => {
         </g>
       </svg>
 
+
   );
 };
 

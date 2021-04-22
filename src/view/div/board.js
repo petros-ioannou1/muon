@@ -4,15 +4,17 @@ import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
 
-import PiecesDiv from "../div/pieces";
 import SquaresDiv from "../div/squares";
+import BlackPiecesDiv from "../div/pieces/black";
+import WhitePiecesDiv from "../div/pieces/white";
 
 class BoardDiv extends Element {
   childElements() {
     return ([
 
-      <PiecesDiv/>,
-      <SquaresDiv/>
+      <SquaresDiv/>,
+      <WhitePiecesDiv/>,
+      <BlackPiecesDiv/>
 
     ]);
   }
