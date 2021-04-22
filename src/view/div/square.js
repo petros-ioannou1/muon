@@ -4,19 +4,23 @@ import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
 
-import positionMixins from "../../mixins/position";
+import coordinatesMixins from "../../mixins/coordinates";
 
-import { plainRed } from "../../colours";
+import { plainRed, darkBrown, lightBrown } from "../../colours";
 import { squareDivWidth, squareDivHeight } from "../../styles";
 
 class SquareDiv extends Element {
   didMount() {
     const { coordinates } = this.properties,
-          top = coordinates.getTop(),
-          left = coordinates.getLeft();
+          x = coordinates.getX(),
+          y = coordinates.getY(),
+          black = ((x + y) % 2) === 1;
 
-    this.setTop(top);
-    this.setLeft(left);
+    black ?
+      this.addClass("black") :
+        this.addClass("white");
+
+    this.applyCoordinates(coordinates);
   }
 
   willUnmount() {
@@ -30,13 +34,21 @@ class SquareDiv extends Element {
   };
 }
 
-Object.assign(SquareDiv.prototype, positionMixins);
+Object.assign(SquareDiv.prototype, coordinatesMixins);
 
 export default withStyle(SquareDiv)`
 
   width: ${squareDivWidth};
   height: ${squareDivHeight};
   position: absolute;
+  
+  .black {
+    background-color: ${darkBrown};
+  }
+  
+  .white {
+    background-color: ${lightBrown};
+  }
   
   :hover {
     border: 2px solid ${plainRed};

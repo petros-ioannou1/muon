@@ -5,18 +5,15 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 
 import BlackKingSVG from "../svg/black/king";
-import positionMixins from "../../mixins/position";
+import coordinatesMixins from "../../mixins/coordinates";
 
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
 class PieceDiv extends Element {
   didMount() {
-    const { coordinates } = this.properties,
-          top = coordinates.getTop(),
-          left = coordinates.getLeft();
+    const { coordinates } = this.properties;
 
-    this.setTop(top);
-    this.setLeft(left);
+    this.applyCoordinates(coordinates);
   }
 
   willUnmount() {
@@ -38,7 +35,7 @@ class PieceDiv extends Element {
   };
 }
 
-Object.assign(PieceDiv.prototype, positionMixins);
+Object.assign(PieceDiv.prototype, coordinatesMixins);
 
 export default withStyle(PieceDiv)`
 
