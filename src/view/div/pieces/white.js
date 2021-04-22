@@ -5,39 +5,38 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 
 import Coordinates from "../../../coordinates";
-import WhitePawnDiv from "../../div/pawn/white";
-import WhiteRookDiv from "../../div/rook/white";
-import WhiteKingDiv from "../../div/king/white";
-import WhiteQueenDiv from "../../div/queen/white";
-import WhiteBishopDiv from "../../div/bishop/white";
-import WhiteKnightDiv from "../../div/knight/white";
+import WhitePawnPieceDiv from "../../div/piece/pawn/white";
+import WhiteRookPieceDiv from "../../div/piece/rook/white";
+import WhiteKingPieceDiv from "../../div/piece/king/white";
+import WhiteQueenPieceDiv from "../../div/piece/queen/white";
+import WhiteBishopPieceDiv from "../../div/piece/bishop/white";
+import WhiteKnightPieceDiv from "../../div/piece/knight/white";
 
 class WhitePiecesDiv extends Element {
   childElements() {
-    const WhitePieces = [
-            WhiteRookDiv,
-            WhiteKnightDiv,
-            WhiteBishopDiv,
-            WhiteKingDiv,
-            WhiteQueenDiv,
-            WhiteBishopDiv,
-            WhiteKnightDiv,
-            WhiteRookDiv,
-            WhitePawnDiv
+    const WhitePieceDivs = [
+            WhiteRookPieceDiv,
+            WhiteKnightPieceDiv,
+            WhiteBishopPieceDiv,
+            WhiteKingPieceDiv,
+            WhiteQueenPieceDiv,
+            WhiteBishopPieceDiv,
+            WhiteKnightPieceDiv,
+            WhiteRookPieceDiv,
+            WhitePawnPieceDiv
           ],
-          whitePieces = WhitePieces.map((Piece, index) => {
+          whitePieceDivs = WhitePieceDivs.map((PieceDiv, index) => {
             const x = index,  ///
                   y = 7,  ///
-                  coordinates = Coordinates.fromXAndY(x, y),
-                  piece =
+                  coordinates = Coordinates.fromXAndY(x, y);
 
-                    <Piece coordinates={coordinates}/>
+            return (
 
-                  ;
+              <PieceDiv coordinates={coordinates}/>
 
-            return piece;
+            );
           }),
-          childElements = whitePieces;
+          childElements = whitePieceDivs;
 
     return childElements;
   }

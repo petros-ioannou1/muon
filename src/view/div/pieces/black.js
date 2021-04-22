@@ -5,39 +5,38 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 
 import Coordinates from "../../../coordinates";
-import BlackPawnDiv from "../../div/pawn/black";
-import BlackRookDiv from "../../div/rook/black";
-import BlackKingDiv from "../../div/king/black";
-import BlackQueenDiv from "../../div/queen/black";
-import BlackBishopDiv from "../../div/bishop/black";
-import BlackKnightDiv from "../../div/knight/black";
+import BlackPawnPieceDiv from "../../div/piece/pawn/black";
+import BlackRookPieceDiv from "../../div/piece/rook/black";
+import BlackKingPieceDiv from "../../div/piece/king/black";
+import BlackQueenPieceDiv from "../../div/piece/queen/black";
+import BlackBishopPieceDiv from "../../div/piece/bishop/black";
+import BlackKnightPieceDiv from "../../div/piece/knight/black";
 
 class BlackPiecesDiv extends Element {
   childElements() {
-    const BlackPieces = [
-            BlackRookDiv,
-            BlackKnightDiv,
-            BlackBishopDiv,
-            BlackKingDiv,
-            BlackQueenDiv,
-            BlackBishopDiv,
-            BlackKnightDiv,
-            BlackRookDiv,
-            BlackPawnDiv
+    const BlackPieceDivs = [
+            BlackRookPieceDiv,
+            BlackKnightPieceDiv,
+            BlackBishopPieceDiv,
+            BlackKingPieceDiv,
+            BlackQueenPieceDiv,
+            BlackBishopPieceDiv,
+            BlackKnightPieceDiv,
+            BlackRookPieceDiv,
+            BlackPawnPieceDiv
           ],
-          blackPieces = BlackPieces.map((Piece, index) => {
+          blackPieceDivs = BlackPieceDivs.map((PieceDiv, index) => {
             const x = index,  ///
                   y = 0,  ///
-                  coordinates = Coordinates.fromXAndY(x, y),
-                  piece =
+                  coordinates = Coordinates.fromXAndY(x, y);
 
-                    <Piece coordinates={coordinates}/>
+            return (
 
-                  ;
+              <PieceDiv coordinates={coordinates}/>
 
-            return piece;
+            );
           }),
-          childElements = blackPieces;
+          childElements = blackPieceDivs;
 
     return childElements;
   }
