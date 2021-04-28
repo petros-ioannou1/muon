@@ -5,6 +5,7 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 
 import coordinatesMixins from "../../mixins/coordinates";
+import dragAndDropMixins from "../../mixins/dragAndDrop";
 
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
@@ -16,11 +17,17 @@ class PieceDiv extends Element {
   }
 
   didMount() {
+    this.onMouseUp(this.mouseUpHandler, this);
+    this.onMouseDown(this.mouseDownHandler, this);
+    this.onMouseMove(this.mouseMoveHandler, this);
+
     this.applyCoordinates(this.coordinates);
   }
 
   willUnmount() {
-    ///
+    this.offMouseUp(this.mouseUpHandler, this);
+    this.offMouseDown(this.mouseDownHandler, this);
+    this.offMouseMove(this.mouseMoveHandler, this);
   }
 
   childElements() {
@@ -33,6 +40,10 @@ class PieceDiv extends Element {
     );
   }
 
+  initialise() {
+    this.setInitialState();
+  }
+
   static tagName = "div";
 
   static defaultProperties = {
@@ -43,12 +54,15 @@ class PieceDiv extends Element {
     const { coordinates } = properties,
           pieceDiv = Element.fromClass(Class, properties, coordinates);
 
+    pieceDiv.initialise();
+
     return pieceDiv;
 
   }
 }
 
 Object.assign(PieceDiv.prototype, coordinatesMixins);
+Object.assign(PieceDiv.prototype, dragAndDropMixins);
 
 export default withStyle(PieceDiv)`
 
@@ -56,4 +70,9 @@ export default withStyle(PieceDiv)`
   height: ${pieceDivHeight};
   position: absolute;
   
+  .dragging {
+    position: fixed;
+    z-index: 10000;
+  }
+
 `;
