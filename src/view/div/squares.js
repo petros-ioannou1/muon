@@ -38,6 +38,8 @@ class SquaresDiv extends Element {
 
 export default withStyle(SquaresDiv)`
 
+  top: 0;
+  left: 0;
   z-index: 0;
   position: absolute;
       

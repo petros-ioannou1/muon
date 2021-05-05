@@ -1,5 +1,6 @@
 "use strict";
 
+import { controller } from "sufficient";
 import { window, constants } from "easy";
 
 import { START_DRAGGING_DELAY } from "../constants";
@@ -24,14 +25,20 @@ function startDragging(mouseTop, mouseLeft) {
   const bounds = this.getBounds(),
         boundsTop = bounds.getTop(),
         boundsLeft = bounds.getLeft(),
-        topOffset = boundsTop - mouseTop,
-        leftOffset = boundsLeft - mouseLeft;
+        topOffset = mouseTop - boundsTop,
+        leftOffset = mouseLeft - boundsLeft,
+        startMouseTop = mouseTop, ///
+        startMouseLeft = mouseLeft; ///
+
+  this.addClass("dragging");
 
   this.setTopOffset(topOffset);
 
   this.setLeftOffset(leftOffset);
 
-  this.addClass("dragging");
+  this.setStartMouseTop(startMouseTop);
+
+  this.setStartMouseLeft(startMouseLeft);
 
   this.drag(mouseTop, mouseLeft);
 }
@@ -121,16 +128,23 @@ function mouseMoveHandler(event, element) {
 }
 
 function drag(mouseTop, mouseLeft) {
-  const windowScrollTop = window.getScrollTop(),
-        windowScrollLeft = window.getScrollLeft(),
-        topOffset = this.getTopOffset(),
-        leftOffset = this.getLeftOffset();
+  const topOffset = this.getTopOffset(),
+        leftOffset = this.getLeftOffset(),
+        startMouseTop = this.getStartMouseTop(),
+        startMouseLeft = this.getStartMouseLeft(),
+        squareDivWidth = controller.getSquareDivWidth(),
+        squareDivHeight = controller.getSquareDivHeight(),
+        windowScrollTop = window.getScrollTop(),
+        windowScrollLeft = window.getScrollLeft();
 
-  let top = mouseTop + topOffset - windowScrollTop,
-      left = mouseLeft + leftOffset - windowScrollLeft;
+  let top = mouseTop - topOffset - windowScrollTop,
+      left = mouseLeft - leftOffset - windowScrollLeft;
 
   top = `${top}px`; ///
   left = `${left}px`; ///
+
+  console.log(Math.floor((mouseLeft - startMouseLeft + windowScrollLeft) / squareDivWidth),
+              Math.floor((mouseTop - startMouseTop + windowScrollTop) / squareDivHeight),)
 
   const css = {
     top,
@@ -167,6 +181,20 @@ function getLeftOffset() {
   return leftOffset;
 }
 
+function getStartMouseTop() {
+  const state = this.getState(),
+        { startMouseTop } = state;
+
+  return startMouseTop;
+}
+
+function getStartMouseLeft() {
+  const state = this.getState(),
+        { startMouseLeft } = state;
+
+  return startMouseLeft;
+}
+
 function updateTimeout(timeout) {
   this.updateState({
     timeout
@@ -185,15 +213,31 @@ function setLeftOffset(leftOffset) {
   });
 }
 
+function setStartMouseTop(startMouseTop) {
+  this.updateState({
+    startMouseTop
+  });
+}
+
+function setStartMouseLeft(startMouseLeft) {
+  this.updateState({
+    startMouseLeft
+  });
+}
+
 function setInitialState() {
   const timeout = null,
         topOffset = null,
-        leftOffset = null;
+        leftOffset = null,
+        startMouseTop = null,
+        startMouseLeft = null;
 
   this.setState({
     timeout,
     topOffset,
-    leftOffset
+    leftOffset,
+    startMouseTop,
+    startMouseLeft
   });
 }
 
@@ -213,8 +257,12 @@ export default {
   getTimeout,
   getTopOffset,
   getLeftOffset,
+  getStartMouseTop,
+  getStartMouseLeft,
   updateTimeout,
   setTopOffset,
   setLeftOffset,
+  setStartMouseTop,
+  setStartMouseLeft,
   setInitialState
 };

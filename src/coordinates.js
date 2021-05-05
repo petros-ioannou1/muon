@@ -34,4 +34,12 @@ export default class Coordinates {
 
     return coordinates;
   }
+
+  static fromNothing() {
+    const x = 0,
+          y = 0,
+          coordinates = new Coordinates(x, y);
+
+    return coordinates;
+  }
 }

@@ -17,17 +17,13 @@ class PieceDiv extends Element {
   }
 
   didMount() {
-    this.onMouseUp(this.mouseUpHandler, this);
-    this.onMouseDown(this.mouseDownHandler, this);
-    this.onMouseMove(this.mouseMoveHandler, this);
-
     this.applyCoordinates(this.coordinates);
+
+    this.onMouseDown(this.mouseDownHandler, this);
   }
 
   willUnmount() {
-    this.offMouseUp(this.mouseUpHandler, this);
     this.offMouseDown(this.mouseDownHandler, this);
-    this.offMouseMove(this.mouseMoveHandler, this);
   }
 
   childElements() {

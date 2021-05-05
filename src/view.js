@@ -18,11 +18,23 @@ class View extends Element {
     ]);
   }
 
+  initialise() {
+    this.assignContext();
+  }
+
   static tagName = "div";
 
   static defaultProperties = {
     className: "view"
   };
+
+  static fromClass(Class, properties) {
+    const view = Element.fromClass(Class, properties);
+
+    view.initialise();
+
+    return view;
+  }
 }
 
 export default withStyle(View)`

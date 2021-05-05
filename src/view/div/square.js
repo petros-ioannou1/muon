@@ -27,6 +27,16 @@ class SquareDiv extends Element {
     ///
   }
 
+  parentContext() {
+    const getSquareDivWidth = this.getWidth.bind(this),
+          getSquareDivHeight = this.getHeight.bind(this);
+
+    return ({
+      getSquareDivWidth,
+      getSquareDivHeight
+    });
+  }
+
   static tagName = "div";
 
   static defaultProperties = {
