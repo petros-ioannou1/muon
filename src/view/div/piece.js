@@ -3,9 +3,10 @@
 import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
+import { controller } from "sufficient";
 
+import draggableMixins from "../../mixins/draggable";
 import coordinatesMixins from "../../mixins/coordinates";
-import dragAndDropMixins from "../../mixins/dragAndDrop";
 
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
@@ -16,14 +17,25 @@ class PieceDiv extends Element {
     this.coordinates = coordinates;
   }
 
+  dragHandler(relativeMouseTop, relativeMouseLeft) {
+    const squareDivWidth = controller.getSquareDivWidth(),
+          squareDivHeight = controller.getSquareDivHeight();
+
+    console.log(Math.floor(relativeMouseLeft / squareDivWidth), Math.floor(relativeMouseTop / squareDivHeight))
+  }
+
   didMount() {
     this.applyCoordinates(this.coordinates);
 
-    this.onMouseDown(this.mouseDownHandler, this);
+    this.onDrag(this.dragHandler, this);
+
+    this.enableDragging();
   }
 
   willUnmount() {
-    this.offMouseDown(this.mouseDownHandler, this);
+    this.disableDragging();
+
+    this.offDrag(this.dragHandler, this);
   }
 
   childElements() {
@@ -53,12 +65,11 @@ class PieceDiv extends Element {
     pieceDiv.initialise();
 
     return pieceDiv;
-
   }
 }
 
+Object.assign(PieceDiv.prototype, draggableMixins);
 Object.assign(PieceDiv.prototype, coordinatesMixins);
-Object.assign(PieceDiv.prototype, dragAndDropMixins);
 
 export default withStyle(PieceDiv)`
 
