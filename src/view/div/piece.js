@@ -21,13 +21,29 @@ class PieceDiv extends Element {
     const squareDivWidth = controller.getSquareDivWidth(),
           squareDivHeight = controller.getSquareDivHeight();
 
-    console.log(Math.floor(relativeMouseLeft / squareDivWidth), Math.floor(relativeMouseTop / squareDivHeight))
+    console.log("drag", Math.floor(relativeMouseLeft / squareDivWidth), Math.floor(relativeMouseTop / squareDivHeight))
+  }
+
+  stopDragHandler(relativeMouseTop, relativeMouseLeft) {
+    const squareDivWidth = controller.getSquareDivWidth(),
+          squareDivHeight = controller.getSquareDivHeight();
+
+    console.log("stopdrag", Math.floor(relativeMouseLeft / squareDivWidth), Math.floor(relativeMouseTop / squareDivHeight))
+  }
+
+  startDragHandler(relativeMouseTop, relativeMouseLeft) {
+    const squareDivWidth = controller.getSquareDivWidth(),
+          squareDivHeight = controller.getSquareDivHeight();
+
+    console.log("startdrag", Math.floor(relativeMouseLeft / squareDivWidth), Math.floor(relativeMouseTop / squareDivHeight))
   }
 
   didMount() {
     this.applyCoordinates(this.coordinates);
 
     this.onDrag(this.dragHandler, this);
+    this.onStopDrag(this.stopDragHandler, this);
+    this.onStartDrag(this.startDragHandler, this);
 
     this.enableDragging();
   }
@@ -36,6 +52,8 @@ class PieceDiv extends Element {
     this.disableDragging();
 
     this.offDrag(this.dragHandler, this);
+    this.offStopDrag(this.stopDragHandler, this);
+    this.offStartDrag(this.startDragHandler, this);
   }
 
   childElements() {
