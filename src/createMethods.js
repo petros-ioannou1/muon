@@ -13,8 +13,13 @@ export default function createMethods(scheduler, model, view) {
     return squareDivHeight;
   }
 
+  function highlightSquareDiv(coordinates) {
+    view.highlightSquareDiv(coordinates);
+  }
+
   return ({
     getSquareDivWidth,
-    getSquareDivHeight
+    getSquareDivHeight,
+    highlightSquareDiv
   });
 }

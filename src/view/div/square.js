@@ -10,17 +10,40 @@ import { darkBrown, lightBrown } from "../../colours";
 import { squareDivWidth, squareDivHeight } from "../../styles";
 
 class SquareDiv extends Element {
+  constructor(selector, coordinates) {
+    super(selector);
+
+    this.coordinates = coordinates;
+  }
+
+  getCoordinates() {
+    return this.coordinates;
+  }
+
+  matchCoordinates(coordinates) {
+    const matchesCoordinates = this.coordinates.match(coordinates);
+
+    return matchesCoordinates;
+  }
+
+  highlight() {
+    this.addClass("highlighted");
+  }
+
+  unhighlight() {
+    this.removeClass("highlighted");
+  }
+
   didMount() {
-    const { coordinates } = this.properties,
-          x = coordinates.getX(),
-          y = coordinates.getY(),
+    const x = this.coordinates.getX(),
+          y = this.coordinates.getY(),
           black = ((x + y) % 2) === 0;
 
     black ?
       this.addClass("black") :
         this.addClass("white");
 
-    this.applyCoordinates(coordinates);
+    this.applyCoordinates(this.coordinates);
   }
 
   willUnmount() {
@@ -42,6 +65,13 @@ class SquareDiv extends Element {
   static defaultProperties = {
     className: "square"
   };
+
+  static fromClass(Class, properties) {
+    const { coordinates } = properties,
+          squareDiv = Element.fromClass(Class, properties, coordinates);
+
+    return squareDiv;
+  }
 }
 
 Object.assign(SquareDiv.prototype, coordinatesMixins);
@@ -58,6 +88,10 @@ export default withStyle(SquareDiv)`
   
   .white {
     background-color: ${lightBrown};
+  }
+  
+  .highlighted {
+    border: 4px solid red;
   }
   
 `;

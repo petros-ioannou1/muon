@@ -29,16 +29,28 @@ export default class Coordinates {
     return left;
   }
 
-  static fromXAndY(x, y) {
-    const coordinates = new Coordinates(x, y);
+  add(coordinates) {
+    let x = coordinates.getX(),
+        y = coordinates.getY();
+
+    x += this.x;
+    y += this.y;
+
+    coordinates = Coordinates.fromXAndY(x, y);  ///
 
     return coordinates;
   }
 
-  static fromNothing() {
-    const x = 0,
-          y = 0,
-          coordinates = new Coordinates(x, y);
+  match(coordinates) {
+    const x = coordinates.getX(),
+          y = coordinates.getY(),
+          matches = (this.x === x) && (this.y === y);
+
+    return matches;
+  }
+
+  static fromXAndY(x, y) {
+    const coordinates = new Coordinates(x, y);
 
     return coordinates;
   }

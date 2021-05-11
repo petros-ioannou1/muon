@@ -5,9 +5,11 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 import { controller } from "sufficient";
 
+import Coordinates from "../../coordinates";
 import draggableMixins from "../../mixins/draggable";
 import coordinatesMixins from "../../mixins/coordinates";
 
+import { HALF } from "../../constants";
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
 class PieceDiv extends Element {
@@ -18,32 +20,25 @@ class PieceDiv extends Element {
   }
 
   dragHandler(relativeMouseTop, relativeMouseLeft) {
-    const squareDivWidth = controller.getSquareDivWidth(),
-          squareDivHeight = controller.getSquareDivHeight();
+    let coordinates = coordinatesFromRelativeMouseTopAndRelativeMouseLeft(relativeMouseTop, relativeMouseLeft);
 
-    console.log("drag", Math.floor(relativeMouseLeft / squareDivWidth), Math.floor(relativeMouseTop / squareDivHeight))
+    coordinates = coordinates.add(this.coordinates);
+
+    controller.highlightSquareDiv(coordinates);
   }
 
   stopDragHandler(relativeMouseTop, relativeMouseLeft) {
-    const squareDivWidth = controller.getSquareDivWidth(),
-          squareDivHeight = controller.getSquareDivHeight();
+    const coordinates = coordinatesFromRelativeMouseTopAndRelativeMouseLeft(relativeMouseTop, relativeMouseLeft);
 
-    console.log("stopdrag", Math.floor(relativeMouseLeft / squareDivWidth), Math.floor(relativeMouseTop / squareDivHeight))
-  }
-
-  startDragHandler(relativeMouseTop, relativeMouseLeft) {
-    const squareDivWidth = controller.getSquareDivWidth(),
-          squareDivHeight = controller.getSquareDivHeight();
-
-    console.log("startdrag", Math.floor(relativeMouseLeft / squareDivWidth), Math.floor(relativeMouseTop / squareDivHeight))
+    ///
   }
 
   didMount() {
     this.applyCoordinates(this.coordinates);
 
     this.onDrag(this.dragHandler, this);
+
     this.onStopDrag(this.stopDragHandler, this);
-    this.onStartDrag(this.startDragHandler, this);
 
     this.enableDragging();
   }
@@ -51,9 +46,9 @@ class PieceDiv extends Element {
   willUnmount() {
     this.disableDragging();
 
-    this.offDrag(this.dragHandler, this);
     this.offStopDrag(this.stopDragHandler, this);
-    this.offStartDrag(this.startDragHandler, this);
+
+    this.offDrag(this.dragHandler, this);
   }
 
   childElements() {
@@ -101,3 +96,13 @@ export default withStyle(PieceDiv)`
   }
 
 `;
+
+function coordinatesFromRelativeMouseTopAndRelativeMouseLeft(relativeMouseTop, relativeMouseLeft) {
+  const squareDivWidth = controller.getSquareDivWidth(),
+        squareDivHeight = controller.getSquareDivHeight(),
+        x = Math.floor((relativeMouseLeft / squareDivWidth) + HALF),
+        y = Math.floor((-relativeMouseTop / squareDivHeight) + HALF),
+        coordinates = Coordinates.fromXAndY(x, y);
+
+  return coordinates;
+}
