@@ -29,6 +29,14 @@ export default class Coordinates {
     return left;
   }
 
+  areValid() {
+    const validX = (this.x >= 0) && (this.x < BOARD_SIZE),
+          validY = (this.y >= 0) && (this.y < BOARD_SIZE),
+          valid = validX && validY;
+
+    return valid;
+  }
+
   add(coordinates) {
     let x = coordinates.getX(),
         y = coordinates.getY();

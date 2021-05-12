@@ -37,17 +37,21 @@ class PieceDiv extends Element {
   }
 
   stopDragHandler(relativeMouseTop, relativeMouseLeft) {
-    const relativeCoordinates = coordinatesFromMouseTopAndMouseLeft(relativeMouseTop, relativeMouseLeft);
+    const relativeCoordinates = coordinatesFromMouseTopAndMouseLeft(relativeMouseTop, relativeMouseLeft),
+          coordinates = this.coordinates.add(relativeCoordinates),
+          coordinatesValid = coordinates.areValid();
+
+    if (coordinatesValid) {
+      this.move(relativeCoordinates);
+    }
 
     controller.unhighlightSquareDiv();
 
-    this.move(relativeCoordinates);
+    this.applyCoordinates(this.coordinates);
   }
 
   move(relativeCoordinates) {
     this.coordinates = this.coordinates.add(relativeCoordinates);
-
-    this.applyCoordinates(this.coordinates);
   }
 
   didMount() {
