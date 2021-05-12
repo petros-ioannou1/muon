@@ -7,6 +7,8 @@ import { Element } from "easy";
 import SquareDiv from "../div/square";
 import Coordinates from "../../coordinates";
 
+import { BOARD_SIZE } from "../../constants";
+
 class SquaresDiv extends Element {
   getSquareDivs() {
     const squareDivChildElements = this.getChildElements("div.square"),
@@ -76,14 +78,14 @@ class SquaresDiv extends Element {
   childElements() {
     const squareDivs = [];
 
-    for (let y = 0; y <= 7; y++) {
-      for (let x = 0; x <= 7; x++) {
+    for (let y = 0; y < BOARD_SIZE; y++) {
+      for (let x = 0; x < BOARD_SIZE; x++) {
         const coordinates = Coordinates.fromXAndY(x, y),
               squareDiv =
 
                 <SquareDiv coordinates={coordinates}/>
 
-        ;
+              ;
 
         squareDivs.push(squareDiv);
       }

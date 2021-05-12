@@ -30,10 +30,6 @@ class PieceDiv extends Element {
   }
 
   stopDragHandler(relativeMouseTop, relativeMouseLeft) {
-    let coordinates = coordinatesFromRelativeMouseTopAndRelativeMouseLeft(relativeMouseTop, relativeMouseLeft);
-
-    coordinates = coordinates.add(this.coordinates);
-
     controller.unhighlightSquareDiv();
   }
 
