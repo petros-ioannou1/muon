@@ -24,13 +24,17 @@ class PieceDiv extends Element {
 
     coordinates = coordinates.add(this.coordinates);
 
+    controller.unhighlightSquareDiv();
+
     controller.highlightSquareDiv(coordinates);
   }
 
   stopDragHandler(relativeMouseTop, relativeMouseLeft) {
-    const coordinates = coordinatesFromRelativeMouseTopAndRelativeMouseLeft(relativeMouseTop, relativeMouseLeft);
+    let coordinates = coordinatesFromRelativeMouseTopAndRelativeMouseLeft(relativeMouseTop, relativeMouseLeft);
 
-    ///
+    coordinates = coordinates.add(this.coordinates);
+
+    controller.unhighlightSquareDiv();
   }
 
   didMount() {

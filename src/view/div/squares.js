@@ -15,6 +15,19 @@ class SquaresDiv extends Element {
     return squareDivs;
   }
 
+  getHighlightedSquareDiv() {
+    const state = this.getState(),
+        { highlightedSquareDiv } = state;
+
+    return highlightedSquareDiv;
+  }
+
+  setHighlightedSquareDiv(highlightedSquareDiv) {
+    this.updateState({
+      highlightedSquareDiv
+    });
+  }
+
   findSquareDiv(coordinates) {
     let foundSquareDiv = null;
 
@@ -39,18 +52,24 @@ class SquaresDiv extends Element {
   highlightSquareDiv(coordinates) {
     const squareDiv = this.findSquareDiv(coordinates);
 
-    let previousHighlightedSquareDiv = this.getPreviousHighlightedSquareDiv();
-
-    if (previousHighlightedSquareDiv !== null) {
-      previousHighlightedSquareDiv.unhighlight();
-    }
-
     if (squareDiv !== null) {
-      squareDiv.highlight();
+      const highlightedSquareDiv = squareDiv; ///
 
-      previousHighlightedSquareDiv = squareDiv; ///
+      highlightedSquareDiv.highlight();
 
-      this.setPreviousHighlightedSquareDiv(previousHighlightedSquareDiv);
+      this.setHighlightedSquareDiv(highlightedSquareDiv);
+    }
+  }
+
+  unhighlightSquareDiv() {
+    let highlightedSquareDiv = this.getHighlightedSquareDiv();
+
+    if (highlightedSquareDiv !== null) {
+      highlightedSquareDiv.unhighlight();
+
+      highlightedSquareDiv = null;
+
+      this.setHighlightedSquareDiv(highlightedSquareDiv);
     }
   }
 
@@ -78,31 +97,20 @@ class SquaresDiv extends Element {
   parentContext() {
     const context = this.getContext(),
           highlightSquareDiv = this.highlightSquareDiv.bind(this),
+          unhighlightSquareDiv = this.unhighlightSquareDiv.bind(this),
           parentContext = Object.assign({}, context, {
-            highlightSquareDiv
+            highlightSquareDiv,
+            unhighlightSquareDiv
           });
 
     return parentContext;
   }
 
-  getPreviousHighlightedSquareDiv() {
-    const state = this.getState(),
-          { previousHighlightedSquareDiv } = state;
-
-    return previousHighlightedSquareDiv;
-  }
-
-  setPreviousHighlightedSquareDiv(previousHighlightedSquareDiv) {
-    this.updateState({
-      previousHighlightedSquareDiv
-    });
-  }
-
   initialise() {
-    const previousHighlightedSquareDiv = null;
+    const highlightedSquareDiv = null;
 
     this.setState({
-      previousHighlightedSquareDiv
+      highlightedSquareDiv
     });
   }
 

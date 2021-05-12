@@ -17,9 +17,14 @@ export default function createMethods(scheduler, model, view) {
     view.highlightSquareDiv(coordinates);
   }
 
+  function unhighlightSquareDiv(coordinates) {
+    view.unhighlightSquareDiv(coordinates);
+  }
+
   return ({
     getSquareDivWidth,
     getSquareDivHeight,
-    highlightSquareDiv
+    highlightSquareDiv,
+    unhighlightSquareDiv
   });
 }

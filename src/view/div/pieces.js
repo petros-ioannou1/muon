@@ -57,7 +57,6 @@ export default withStyle(PiecesDiv)`
   
   top: 0;
   left: 0;
-  z-index: 1;
   position: absolute;
       
 `;
