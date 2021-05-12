@@ -10,6 +10,10 @@ import BlackPiecesDiv from "../div/pieces/black";
 import WhitePiecesDiv from "../div/pieces/white";
 
 class BoardDiv extends Element {
+  isInverted() {
+    return this.inverted;
+  }
+
   childElements() {
     return ([
 

@@ -9,4 +9,5 @@ export const DRAG = "drag";
 export const STOP_DRAG = "stopdrag";
 export const START_DRAG = "startdrag";
 export const BOARD_SIZE = 8;
+export const BOARD_INVERTED = false;
 export const START_DRAG_DELAY = 175;

@@ -8,14 +8,16 @@ import Coordinates from "../../coordinates";
 import RankLabelDiv from "../div/label/rank";
 import FileLabelDiv from "../div/label/file";
 
-import { BOARD_SIZE } from "../../constants";
+import { BOARD_SIZE, BOARD_INVERTED } from "../../constants";
 
 class LabelsDiv extends Element {
   childElements() {
     const labelDivs = [];
 
     for (let y = 0; y < BOARD_SIZE; y++) {
-      const x = -1,
+      const x = BOARD_INVERTED ?
+                  BOARD_SIZE :
+                    -1,
             coordinates = Coordinates.fromXAndY(x, y),
             rankLabelDiv =
 
@@ -27,7 +29,9 @@ class LabelsDiv extends Element {
     }
 
     for (let x = 0; x < BOARD_SIZE; x++) {
-      const y = -1,
+      const y = BOARD_INVERTED ?
+                  BOARD_SIZE :
+                    -1,
             coordinates = Coordinates.fromXAndY(x, y),
             fileLabelDiv =
 

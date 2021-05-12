@@ -3,36 +3,36 @@
 import { controller } from "sufficient";
 
 import { squareDivSize } from "../styles";
-import { BOARD_SIZE, HALF } from "../constants";
+import { HALF, BOARD_SIZE, BOARD_INVERTED } from "../constants";
 
-export function xFromLeft(left, inverted = true) {
+export function xFromLeft(left) {
   const squareDivWidth = controller.getSquareDivWidth(),
-        x = inverted ?
+        x = BOARD_INVERTED ?
               Math.floor((-left / squareDivWidth) + HALF) :
                 Math.floor((left / squareDivWidth) + HALF);
 
   return x;
 }
 
-export function yFromTop(top, inverted = true) {
+export function yFromTop(top) {
   const squareDivHeight = controller.getSquareDivHeight(),
-        y = inverted ?
+        y = BOARD_INVERTED ?
               Math.floor((top / squareDivHeight) + HALF) :
                 Math.floor((-top / squareDivHeight) + HALF);
 
   return y;
 }
 
-export function leftFromX(x, inverted = true) {
-  const left = inverted ?
+export function leftFromX(x) {
+  const left = BOARD_INVERTED ?
                  `${((BOARD_SIZE - 1) - x) * squareDivSize}rem` :
                    `${x * squareDivSize}rem`;
 
   return left;
 }
 
-export function topFromY(y, inverted = true) {
-  const top = inverted ?
+export function topFromY(y) {
+  const top = BOARD_INVERTED ?
                 `${y * squareDivSize}rem` :
                   `${((BOARD_SIZE - 1) - y) * squareDivSize}rem`;
 
