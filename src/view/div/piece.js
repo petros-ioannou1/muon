@@ -9,7 +9,7 @@ import Coordinates from "../../coordinates";
 import draggableMixins from "../../mixins/draggable";
 import coordinatesMixins from "../../mixins/coordinates";
 
-import { HALF } from "../../constants";
+import { yFromTop, xFromLeft } from "../../utilitites/coordinates";
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
 class PieceDiv extends Element {
@@ -28,8 +28,8 @@ class PieceDiv extends Element {
   }
 
   dragHandler(relativeMouseTop, relativeMouseLeft) {
-    const relativeCoordinates = coordinatesFromMouseTopAndMouseLeft(relativeMouseTop, relativeMouseLeft),
-          coordinates = this.coordinates.add(relativeCoordinates);
+    const relativeMouseCoordinates = coordinatesFromTopAndLeft(relativeMouseTop, relativeMouseLeft),
+          coordinates = this.coordinates.add(relativeMouseCoordinates);
 
     controller.unhighlightSquareDiv();
 
@@ -37,12 +37,12 @@ class PieceDiv extends Element {
   }
 
   stopDragHandler(relativeMouseTop, relativeMouseLeft) {
-    const relativeCoordinates = coordinatesFromMouseTopAndMouseLeft(relativeMouseTop, relativeMouseLeft),
-          coordinates = this.coordinates.add(relativeCoordinates),
+    const relativeMouseCoordinates = coordinatesFromTopAndLeft(relativeMouseTop, relativeMouseLeft),
+          coordinates = this.coordinates.add(relativeMouseCoordinates),
           coordinatesValid = coordinates.areValid();
 
     if (coordinatesValid) {
-      this.move(relativeCoordinates);
+      this.move(relativeMouseCoordinates);
     }
 
     controller.unhighlightSquareDiv();
@@ -118,11 +118,9 @@ export default withStyle(PieceDiv)`
 
 `;
 
-function coordinatesFromMouseTopAndMouseLeft(mouseTop, mouseLeft) {
-  const squareDivWidth = controller.getSquareDivWidth(),
-        squareDivHeight = controller.getSquareDivHeight(),
-        x = Math.floor((mouseLeft / squareDivWidth) + HALF),
-        y = Math.floor((-mouseTop / squareDivHeight) + HALF),
+function coordinatesFromTopAndLeft(top, left) {
+  const y = yFromTop(top),
+        x = xFromLeft(left),
         coordinates = Coordinates.fromXAndY(x, y);
 
   return coordinates;
