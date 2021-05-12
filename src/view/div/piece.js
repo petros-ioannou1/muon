@@ -19,10 +19,17 @@ class PieceDiv extends Element {
     this.coordinates = coordinates;
   }
 
-  dragHandler(relativeMouseTop, relativeMouseLeft) {
-    let coordinates = coordinatesFromRelativeMouseTopAndRelativeMouseLeft(relativeMouseTop, relativeMouseLeft);
+  getCoordinates() {
+    return this.coordinates;
+  }
 
-    coordinates = coordinates.add(this.coordinates);
+  setCoordinates(coordinates) {
+    this.coordinates = coordinates;
+  }
+
+  dragHandler(relativeMouseTop, relativeMouseLeft) {
+    const relativeCoordinates = coordinatesFromMouseTopAndMouseLeft(relativeMouseTop, relativeMouseLeft),
+          coordinates = this.coordinates.add(relativeCoordinates);
 
     controller.unhighlightSquareDiv();
 
@@ -30,7 +37,17 @@ class PieceDiv extends Element {
   }
 
   stopDragHandler(relativeMouseTop, relativeMouseLeft) {
+    const relativeCoordinates = coordinatesFromMouseTopAndMouseLeft(relativeMouseTop, relativeMouseLeft);
+
     controller.unhighlightSquareDiv();
+
+    this.move(relativeCoordinates);
+  }
+
+  move(relativeCoordinates) {
+    this.coordinates = this.coordinates.add(relativeCoordinates);
+
+    this.applyCoordinates(this.coordinates);
   }
 
   didMount() {
@@ -91,17 +108,17 @@ export default withStyle(PieceDiv)`
   position: absolute;
   
   .dragging {
+    z-index: 1;
     position: fixed;
-    z-index: 10000;
   }
 
 `;
 
-function coordinatesFromRelativeMouseTopAndRelativeMouseLeft(relativeMouseTop, relativeMouseLeft) {
+function coordinatesFromMouseTopAndMouseLeft(mouseTop, mouseLeft) {
   const squareDivWidth = controller.getSquareDivWidth(),
         squareDivHeight = controller.getSquareDivHeight(),
-        x = Math.floor((relativeMouseLeft / squareDivWidth) + HALF),
-        y = Math.floor((-relativeMouseTop / squareDivHeight) + HALF),
+        x = Math.floor((mouseLeft / squareDivWidth) + HALF),
+        y = Math.floor((-mouseTop / squareDivHeight) + HALF),
         coordinates = Coordinates.fromXAndY(x, y);
 
   return coordinates;
