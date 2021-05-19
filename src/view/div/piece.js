@@ -28,11 +28,14 @@ class PieceDiv extends Element {
 
   dragHandler(relativeMouseTop, relativeMouseLeft) {
     const relativeMouseCoordinates = coordinatesFromTopAndLeft(relativeMouseTop, relativeMouseLeft),
-          coordinates = this.coordinates.add(relativeMouseCoordinates);
+          coordinates = this.coordinates.add(relativeMouseCoordinates),
+          coordinatesValid = coordinates.areValid();
 
-    controller.unhighlightSquareDiv();
+    controller.unhighlightCoordinates();
 
-    controller.highlightSquareDiv(coordinates);
+    if (coordinatesValid) {
+      controller.highlightCoordinates(coordinates);
+    }
   }
 
   stopDragHandler(relativeMouseTop, relativeMouseLeft) {
@@ -44,7 +47,7 @@ class PieceDiv extends Element {
       this.move(coordinates) :
         this.move(this.coordinates);
 
-    controller.unhighlightSquareDiv();
+    controller.unhighlightCoordinates();
   }
 
   mouseOutHandler(event, element) {

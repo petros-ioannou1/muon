@@ -69,15 +69,12 @@ class SquaresDiv extends Element {
 
     moves.forEach((move) => {
       const coordinates = move.getCoordinates(),
-            squareDiv = this.findSquareDiv(coordinates);
+            squareDiv = this.findSquareDiv(coordinates),
+            moveHighlightedSquareDiv = squareDiv; ///
 
-      if (squareDiv !== null) {
-        const moveHighlightedSquareDiv = squareDiv; ///
+      moveHighlightedSquareDiv.highlightMove();
 
-        moveHighlightedSquareDiv.highlightMove();
-
-        moveHighlightedSquareDivs.push(moveHighlightedSquareDiv);
-      }
+      moveHighlightedSquareDivs.push(moveHighlightedSquareDiv);
     });
 
     this.setMoveHighlightedSquareDivs(moveHighlightedSquareDivs);
@@ -95,19 +92,16 @@ class SquaresDiv extends Element {
     this.setMoveHighlightedSquareDivs(moveHighlightedSquareDivs);
   }
 
-  highlightSquareDiv(coordinates) {
-    const squareDiv = this.findSquareDiv(coordinates);
+  highlightCoordinates(coordinates) {
+    const squareDiv = this.findSquareDiv(coordinates),
+          highlightedSquareDiv = squareDiv; ///
 
-    if (squareDiv !== null) {
-      const highlightedSquareDiv = squareDiv; ///
+    highlightedSquareDiv.highlight();
 
-      highlightedSquareDiv.highlight();
-
-      this.setHighlightedSquareDiv(highlightedSquareDiv);
-    }
+    this.setHighlightedSquareDiv(highlightedSquareDiv);
   }
 
-  unhighlightSquareDiv() {
+  unhighlightCoordinates() {
     let highlightedSquareDiv = this.getHighlightedSquareDiv();
 
     if (highlightedSquareDiv !== null) {
@@ -144,13 +138,13 @@ class SquaresDiv extends Element {
     const context = this.getContext(),
           highlightMoves = this.highlightMoves.bind(this),
           unhighlightMoves = this.unhighlightMoves.bind(this),
-          highlightSquareDiv = this.highlightSquareDiv.bind(this),
-          unhighlightSquareDiv = this.unhighlightSquareDiv.bind(this),
+          highlightCoordinates = this.highlightCoordinates.bind(this),
+          unhighlightCoordinates = this.unhighlightCoordinates.bind(this),
           parentContext = Object.assign({}, context, {
             highlightMoves,
             unhighlightMoves,
-            highlightSquareDiv,
-            unhighlightSquareDiv
+            highlightCoordinates,
+            unhighlightCoordinates
           });
 
     return parentContext;

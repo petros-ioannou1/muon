@@ -21,12 +21,12 @@ export default function createMethods(scheduler, model, view) {
     return squareDivHeight;
   }
 
-  function highlightSquareDiv(coordinates) {
-    view.highlightSquareDiv(coordinates);
+  function highlightCoordinates(coordinates) {
+    view.highlightCoordinates(coordinates);
   }
 
-  function unhighlightSquareDiv(coordinates) {
-    view.unhighlightSquareDiv(coordinates);
+  function unhighlightCoordinates(coordinates) {
+    view.unhighlightCoordinates(coordinates);
   }
 
   return ({
@@ -34,7 +34,7 @@ export default function createMethods(scheduler, model, view) {
     unhighlightMoves,
     getSquareDivWidth,
     getSquareDivHeight,
-    highlightSquareDiv,
-    unhighlightSquareDiv
+    highlightCoordinates,
+    unhighlightCoordinates
   });
 }
