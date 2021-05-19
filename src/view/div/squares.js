@@ -30,6 +30,19 @@ class SquaresDiv extends Element {
     });
   }
 
+  getMoveHighlightedSquareDivs() {
+    const state = this.getState(),
+          { highlightedMoveSquareDivs } = state;
+
+    return highlightedMoveSquareDivs;
+  }
+
+  setMoveHighlightedSquareDivs(highlightedMoveSquareDivs) {
+    this.updateState({
+      highlightedMoveSquareDivs
+    });
+  }
+
   findSquareDiv(coordinates) {
     let foundSquareDiv = null;
 
@@ -51,19 +64,35 @@ class SquaresDiv extends Element {
     return squareDiv;
   }
 
-  highlightMoves(moves){
+  highlightMoves(moves) {
+    const moveHighlightedSquareDivs = [];
+
     moves.forEach((move) => {
       const coordinates = move.getCoordinates(),
             squareDiv = this.findSquareDiv(coordinates);
 
       if (squareDiv !== null) {
-        squareDiv.highlightMove();
+        const moveHighlightedSquareDiv = squareDiv; ///
+
+        moveHighlightedSquareDiv.highlightMove();
+
+        moveHighlightedSquareDivs.push(moveHighlightedSquareDiv);
       }
     });
+
+    this.setMoveHighlightedSquareDivs(moveHighlightedSquareDivs);
   }
 
-  unhighlightMoves(){
-    console.log("unhighlight")
+  unhighlightMoves() {
+    let moveHighlightedSquareDivs = this.getMoveHighlightedSquareDivs();
+
+    moveHighlightedSquareDivs.forEach((moveHighlightedSquareDiv) => {
+      moveHighlightedSquareDiv.unhighlightMove();
+    });
+
+    moveHighlightedSquareDivs = [];
+
+    this.setMoveHighlightedSquareDivs(moveHighlightedSquareDivs);
   }
 
   highlightSquareDiv(coordinates) {
@@ -128,10 +157,12 @@ class SquaresDiv extends Element {
   }
 
   initialise() {
-    const highlightedSquareDiv = null;
+    const highlightedSquareDiv = null,
+          highlightedMoveSquareDivs = [];
 
     this.setState({
-      highlightedSquareDiv
+      highlightedSquareDiv,
+      highlightedMoveSquareDivs
     });
   }
 
