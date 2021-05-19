@@ -1,12 +1,12 @@
 "use strict";
 
-import PieceDiv from "../../../div/piece";
-import WhiteKingSVG from "../../../svg/king/white"
+import KnightDiv from "../../../div/piece/knight";
+import WhiteKnightSVG from "../../../svg/knight/white"
 
-export default class WhiteKingDiv extends PieceDiv {
-  static SVG = WhiteKingSVG;
+export default class WhiteKnightDiv extends KnightDiv {
+  static SVG = WhiteKnightSVG;
 
   static defaultProperties = {
-    className: "white-king"
+    className: "white"
   };
 }

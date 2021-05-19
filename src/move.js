@@ -1,6 +1,6 @@
 "use strict";
 
-class Move {
+export default class Move {
   constructor(pieceDiv, coordinates) {
     this.pieceDiv = pieceDiv;
     this.coordinates = coordinates;
@@ -16,5 +16,11 @@ class Move {
 
   make() {
     this.pieceDiv.move(this.coordinates);
+  }
+
+  static fromPieceDivAndCoordinates(pieceDiv, coordinates) {
+    const move = new Move(pieceDiv, coordinates);
+
+    return move;
   }
 }
