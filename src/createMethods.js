@@ -1,6 +1,14 @@
 "use strict";
 
 export default function createMethods(scheduler, model, view) {
+  function highlightMoves(moves) {
+    view.highlightMoves(moves);
+  }
+
+  function unhighlightMoves() {
+    view.unhighlightMoves();
+  }
+
   function getSquareDivWidth() {
     const squareDivWidth = view.getSquareDivWidth();
 
@@ -22,6 +30,8 @@ export default function createMethods(scheduler, model, view) {
   }
 
   return ({
+    highlightMoves,
+    unhighlightMoves,
     getSquareDivWidth,
     getSquareDivHeight,
     highlightSquareDiv,

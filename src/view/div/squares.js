@@ -51,6 +51,14 @@ class SquaresDiv extends Element {
     return squareDiv;
   }
 
+  highlightMoves(moves){
+    console.log("highlight")
+  }
+
+  unhighlightMoves(){
+    console.log("unhighlight")
+  }
+
   highlightSquareDiv(coordinates) {
     const squareDiv = this.findSquareDiv(coordinates);
 
@@ -98,9 +106,13 @@ class SquaresDiv extends Element {
 
   parentContext() {
     const context = this.getContext(),
+          highlightMoves = this.highlightMoves.bind(this),
+          unhighlightMoves = this.unhighlightMoves.bind(this),
           highlightSquareDiv = this.highlightSquareDiv.bind(this),
           unhighlightSquareDiv = this.unhighlightSquareDiv.bind(this),
           parentContext = Object.assign({}, context, {
+            highlightMoves,
+            unhighlightMoves,
             highlightSquareDiv,
             unhighlightSquareDiv
           });

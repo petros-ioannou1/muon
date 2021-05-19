@@ -48,6 +48,22 @@ class PieceDiv extends Element {
     controller.unhighlightSquareDiv();
   }
 
+  mouseOutHandler(event, element) {
+    controller.unhighlightMoves();
+  }
+
+  mouseOverHandler(event, element) {
+    const moves = this.generateMoves();
+
+    controller.highlightMoves(moves);
+  }
+
+  generateMoves() {
+    const moves = [];
+
+    return moves;
+  }
+
   move(coordinates) {
     this.coordinates = coordinates;
 
@@ -55,17 +71,25 @@ class PieceDiv extends Element {
   }
 
   didMount() {
-    this.applyCoordinates(this.coordinates);
-
     this.onDrag(this.dragHandler, this);
 
     this.onStopDrag(this.stopDragHandler, this);
 
+    this.onMouseOut(this.mouseOutHandler, this);
+
+    this.onMouseOver(this.mouseOverHandler, this);
+
     this.enableDragging();
+
+    this.applyCoordinates(this.coordinates);
   }
 
   willUnmount() {
     this.disableDragging();
+
+    this.offMouseOver(this.mouseOverHandler, this);
+
+    this.offMouseOut(this.mouseOutHandler, this);
 
     this.offStopDrag(this.stopDragHandler, this);
 
