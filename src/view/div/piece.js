@@ -41,17 +41,17 @@ class PieceDiv extends Element {
           coordinates = this.coordinates.add(relativeMouseCoordinates),
           coordinatesValid = coordinates.areValid();
 
-    if (coordinatesValid) {
-      this.move(relativeMouseCoordinates);
-    }
+    coordinatesValid ?
+      this.move(coordinates) :
+        this.move(this.coordinates);
 
     controller.unhighlightSquareDiv();
-
-    this.applyCoordinates(this.coordinates);
   }
 
-  move(relativeCoordinates) {
-    this.coordinates = this.coordinates.add(relativeCoordinates);
+  move(coordinates) {
+    this.coordinates = coordinates;
+
+    this.applyCoordinates(this.coordinates);
   }
 
   didMount() {
