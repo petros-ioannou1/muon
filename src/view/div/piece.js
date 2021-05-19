@@ -5,11 +5,10 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 import { controller } from "sufficient";
 
-import Coordinates from "../../coordinates";
 import draggableMixins from "../../mixins/draggable";
 import coordinatesMixins from "../../mixins/coordinates";
 
-import { yFromTop, xFromLeft } from "../../utilitites/coordinates";
+import { coordinatesFromTopAndLeft } from "../../utilitites/coordinates";
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
 class PieceDiv extends Element {
@@ -142,10 +141,3 @@ export default withStyle(PieceDiv)`
 
 `;
 
-function coordinatesFromTopAndLeft(top, left) {
-  const y = yFromTop(top),
-        x = xFromLeft(left),
-        coordinates = Coordinates.fromXAndY(x, y);
-
-  return coordinates;
-}

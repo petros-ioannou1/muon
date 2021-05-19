@@ -2,6 +2,8 @@
 
 import { controller } from "sufficient";
 
+import Coordinates from "../coordinates";
+
 import { squareDivSize } from "../styles";
 import { HALF, BOARD_SIZE, BOARD_INVERTED } from "../constants";
 
@@ -37,4 +39,12 @@ export function topFromY(y) {
                   `${((BOARD_SIZE - 1) - y) * squareDivSize}rem`;
 
   return top;
+}
+
+export function coordinatesFromTopAndLeft(top, left) {
+  const y = yFromTop(top),
+        x = xFromLeft(left),
+        coordinates = Coordinates.fromXAndY(x, y);
+
+  return coordinates;
 }
