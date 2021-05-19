@@ -52,7 +52,14 @@ class SquaresDiv extends Element {
   }
 
   highlightMoves(moves){
-    console.log("highlight")
+    moves.forEach((move) => {
+      const coordinates = move.getCoordinates(),
+            squareDiv = this.findSquareDiv(coordinates);
+
+      if (squareDiv !== null) {
+        squareDiv.highlightMove();
+      }
+    });
   }
 
   unhighlightMoves(){

@@ -7,7 +7,7 @@ import { Element } from "easy";
 import coordinatesMixins from "../../mixins/coordinates";
 
 import { squareDivWidth, squareDivHeight } from "../../styles";
-import { darkBrown, lightBrown, brightRed } from "../../colours";
+import { darkBrown, lightBrown, brightRed, lightGrey } from "../../colours";
 
 class SquareDiv extends Element {
   constructor(selector, coordinates) {
@@ -32,6 +32,14 @@ class SquareDiv extends Element {
 
   unhighlight() {
     this.removeClass("highlighted");
+  }
+
+  highlightMove() {
+    this.addClass("highlighted-move");
+  }
+
+  unhighlightMove() {
+    this.removeClass("highlighted-move");
   }
 
   didMount() {
@@ -92,6 +100,18 @@ export default withStyle(SquareDiv)`
   
   .highlighted {
     border: 4px solid ${brightRed};
+  }
+  
+  .highlighted-move::after {
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    content: " ";
+    opacity: 75%;
+    position: absolute;
+    border-radius: 50%;
+    background-color: ${lightGrey};
   }
   
 `;
