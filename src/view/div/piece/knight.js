@@ -6,15 +6,19 @@ import Coordinates from "../../../coordinates";
 
 export default class KnightDiv extends PieceDiv {
   generateMoves() {
-    const x = 1,
-          y = 2,
-          relativeCoordinates = Coordinates.fromXAndY(x, y),
-          coordinates = this.coordinates.add(relativeCoordinates),
-          pieceDiv = this,  ///
-          move = Move.fromPieceDivAndCoordinates(pieceDiv, coordinates),
-          moves = [
-            move
-          ];
+    const moves = [];
+
+    relativeCoordinatesArray.forEach((relativeCoordinates) => {
+      const coordinates = this.coordinates.add(relativeCoordinates),
+            coordinatesValid = coordinates.areValid();
+
+      if (coordinatesValid) {
+        const pieceDiv = this,  ///
+              move = Move.fromPieceDivAndCoordinates(pieceDiv, coordinates);
+
+        moves.push(move);
+      }
+    });
 
     return moves;
   }
@@ -23,3 +27,19 @@ export default class KnightDiv extends PieceDiv {
     className: "knight"
   };
 }
+
+const relativeCoordinatesArray = [
+  { x: +1, y: +2 },
+  { x: +1, y: -2 },
+  { x: -1, y: +2 },
+  { x: -1, y: -2 },
+  { x: +2, y: +1 },
+  { x: +2, y: -1 },
+  { x: -2, y: +1 },
+  { x: -2, y: -1 }
+].map((json) => {
+  const { x, y } = json,
+        relativeCoordinates = Coordinates.fromXAndY(x, y);
+
+  return relativeCoordinates;
+});
