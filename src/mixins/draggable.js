@@ -19,7 +19,7 @@ function startWaitingToDrag(mouseTop, mouseLeft) {
     timeout = setTimeout(() => {
       this.resetTimeout();
 
-      const draggableMouseOver = this.isDraggableMouseOver(mouseTop, mouseLeft);
+      const draggableMouseOver = this.isMouseOver(mouseTop, mouseLeft);
 
       if (draggableMouseOver) {
         this.startDrag(mouseTop, mouseLeft);
@@ -175,70 +175,19 @@ function enableDragging() {
     startMouseLeft
   });
 
-  this.onMouseDown(this.draggableMouseDownHandler, this);
+  this.onMouseDown(mouseDownHandler, this);
 }
 
 function disableDragging() {
-  this.offMouseDown(this.draggableMouseDownHandler, this);
+  this.offMouseDown(mouseDownHandler, this);
 }
 
-function isDraggableMouseOver(mouseTop, mouseLeft) {
+function isMouseOver(mouseTop, mouseLeft) {
   const bounds = this.getBounds(),
         boundsOverlappingMouse = bounds.isOverlappingMouse(mouseTop, mouseLeft),
         draggableMouseOver = boundsOverlappingMouse; ///
 
   return draggableMouseOver;
-}
-
-function draggableMouseDownHandler(event, element) {
-  const { button } = event;
-
-  window.on("blur", this.draggableMouseUpHandler, this); ///
-
-  window.onMouseUp(this.draggableMouseUpHandler, this);
-
-  window.onMouseMove(this.draggableMouseMoveHandler, this);
-
-  if (button === LEFT_MOUSE_BUTTON) {
-    const dragging = this.isDragging();
-
-    if (!dragging) {
-      const mouseTop = mouseTopFromEvent(event),
-            mouseLeft = mouseLeftFromEvent(event);
-
-      this.startWaitingToDrag(mouseTop, mouseLeft);
-    }
-  }
-}
-
-function draggableMouseMoveHandler(event, element) {
-  const mouseTop = mouseTopFromEvent(event),
-        mouseLeft = mouseLeftFromEvent(event);
-
-  const dragging = this.isDragging();
-
-  if (dragging) {
-    this.dragging(mouseTop, mouseLeft);
-  }
-}
-
-function draggableMouseUpHandler(event, element) {
-  window.off("blur", this.draggableMouseUpHandler, this);  ///
-
-  window.offMouseUp(this.draggableMouseUpHandler, this);
-
-  window.offMouseMove(this.draggableMouseMoveHandler, this);
-
-  const dragging = this.isDragging();
-
-  if (dragging) {
-    const mouseTop = mouseTopFromEvent(event),
-          mouseLeft = mouseLeftFromEvent(event);
-
-    this.stopDrag(mouseTop, mouseLeft);
-  } else {
-    this.stopWaitingToDrag();
-  }
 }
 
 function resetTimeout() {
@@ -329,10 +278,7 @@ export default {
   callHandlers,
   enableDragging,
   disableDragging,
-  isDraggableMouseOver,
-  draggableMouseDownHandler,
-  draggableMouseMoveHandler,
-  draggableMouseUpHandler,
+  isMouseOver,
   resetTimeout,
   getTimeout,
   getTopOffset,
@@ -361,3 +307,55 @@ function mouseLeftFromEvent(event) {
 
   return mouseLeft;
 }
+
+function mouseUpHandler(event, element) {
+  window.off("blur", mouseUpHandler, this);  ///
+
+  window.offMouseUp(mouseUpHandler, this);
+
+  window.offMouseMove(mouseMoveHandler, this);
+
+  const dragging = this.isDragging();
+
+  if (dragging) {
+    const mouseTop = mouseTopFromEvent(event),
+          mouseLeft = mouseLeftFromEvent(event);
+
+    this.stopDrag(mouseTop, mouseLeft);
+  } else {
+    this.stopWaitingToDrag();
+  }
+}
+
+function mouseDownHandler(event, element) {
+  const { button } = event;
+
+  window.on("blur", mouseUpHandler, this); ///
+
+  window.onMouseUp(mouseUpHandler, this);
+
+  window.onMouseMove(mouseMoveHandler, this);
+
+  if (button === LEFT_MOUSE_BUTTON) {
+    const dragging = this.isDragging();
+
+    if (!dragging) {
+      const mouseTop = mouseTopFromEvent(event),
+            mouseLeft = mouseLeftFromEvent(event);
+
+      this.startWaitingToDrag(mouseTop, mouseLeft);
+    }
+  }
+}
+
+function mouseMoveHandler(event, element) {
+  const mouseTop = mouseTopFromEvent(event),
+        mouseLeft = mouseLeftFromEvent(event);
+
+  const dragging = this.isDragging();
+
+  if (dragging) {
+    this.dragging(mouseTop, mouseLeft);
+  }
+}
+
