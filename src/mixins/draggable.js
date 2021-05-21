@@ -161,6 +161,20 @@ function callHandlers(eventType, relativeMouseTop, relativeMouseLeft) {
 }
 
 function enableDragging() {
+  const timeout = null,
+        topOffset = null,
+        leftOffset = null,
+        startMouseTop = null,
+        startMouseLeft = null;
+
+  this.setState({
+    timeout,
+    topOffset,
+    leftOffset,
+    startMouseTop,
+    startMouseLeft
+  });
+
   this.onMouseDown(this.draggableMouseDownHandler, this);
 }
 
@@ -298,22 +312,6 @@ function setStartMouseLeft(startMouseLeft) {
   });
 }
 
-function setInitialState() {
-  const timeout = null,
-        topOffset = null,
-        leftOffset = null,
-        startMouseTop = null,
-        startMouseLeft = null;
-
-  this.setState({
-    timeout,
-    topOffset,
-    leftOffset,
-    startMouseTop,
-    startMouseLeft
-  });
-}
-
 export default {
   isDragging,
   startWaitingToDrag,
@@ -345,8 +343,7 @@ export default {
   setTopOffset,
   setLeftOffset,
   setStartMouseTop,
-  setStartMouseLeft,
-  setInitialState
+  setStartMouseLeft
 };
 
 function mouseTopFromEvent(event) {

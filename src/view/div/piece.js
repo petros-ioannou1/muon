@@ -108,10 +108,6 @@ class PieceDiv extends Element {
     );
   }
 
-  initialise() {
-    this.setInitialState();
-  }
-
   static tagName = "div";
 
   static defaultProperties = {
@@ -121,8 +117,6 @@ class PieceDiv extends Element {
   static fromClass(Class, properties) {
     const { coordinates } = properties,
           pieceDiv = Element.fromClass(Class, properties, coordinates);
-
-    pieceDiv.initialise();
 
     return pieceDiv;
   }

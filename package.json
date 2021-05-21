@@ -15,10 +15,10 @@
   },
   "devDependencies": {
     "@swc/core": "^1.2.51",
-    "easy": "^11.1.22",
-    "easy-with-style": "^3.0.30",
+    "easy": "^12.0.6",
+    "easy-with-style": "^3.0.33",
     "esbuild": "^0.11.2",
-    "juxtapose": "^3.0.22",
+    "juxtapose": "^4.0.6",
     "necessary": "^7.1.10",
     "sufficient": "^2.0.6",
     "watchful-cli": "^1.6.15"
