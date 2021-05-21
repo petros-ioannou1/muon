@@ -2,9 +2,74 @@
 
 import { window, constants } from "easy";
 
-import { DRAG, STOP_DRAG, START_DRAG, START_DRAG_DELAY } from "../constants";
+import { mouseTopFromEvent, mouseLeftFromEvent } from "../utilitites/event";
+import { DRAGGING, STOP_DRAGGING, START_DRAGGING, START_DRAG_DELAY } from "../constants";
 
 const { LEFT_MOUSE_BUTTON } = constants;
+
+function onDragging(draggingHandler, element) {
+  const eventType = DRAGGING,
+        handler = draggingHandler;  ///
+
+  this.addEventListener(eventType, handler, element);
+}
+
+function offDragging(draggingHandler, element) {
+  const eventType = DRAGGING,
+        handler = draggingHandler;  ///
+
+  this.removeEventListener(eventType, handler, element);
+}
+
+function onStopDragging(stopDragHandler, element) {
+  const eventType = STOP_DRAGGING,
+        handler = stopDragHandler;  ///
+
+  this.addEventListener(eventType, handler, element);
+}
+
+function offStopDragging(stopDragHandler, element) {
+  const eventType = STOP_DRAGGING,
+        handler = stopDragHandler;  ///
+
+  this.removeEventListener(eventType, handler, element);
+}
+
+function onStartDragging(startDragHandler, element) {
+  const eventType = START_DRAGGING,
+        handler = startDragHandler;  ///
+
+  this.addEventListener(eventType, handler, element);
+}
+
+function offStartDragging(startDragHandler, element) {
+  const eventType = START_DRAGGING,
+        handler = startDragHandler;  ///
+
+  this.removeEventListener(eventType, handler, element);
+}
+
+function enableDragging() {
+  const timeout = null,
+        topOffset = null,
+        leftOffset = null,
+        startMouseTop = null,
+        startMouseLeft = null;
+
+  this.setState({
+    timeout,
+    topOffset,
+    leftOffset,
+    startMouseTop,
+    startMouseLeft
+  });
+
+  this.onMouseDown(mouseDownHandler, this);
+}
+
+function disableDragging() {
+  this.offMouseDown(mouseDownHandler, this);
+}
 
 function isDragging() {
   const dragging = this.hasClass("dragging");
@@ -22,7 +87,7 @@ function startWaitingToDrag(mouseTop, mouseLeft) {
       const draggableMouseOver = this.isMouseOver(mouseTop, mouseLeft);
 
       if (draggableMouseOver) {
-        this.startDrag(mouseTop, mouseLeft);
+        this.startDragging(mouseTop, mouseLeft);
       }
     }, START_DRAG_DELAY);
 
@@ -40,9 +105,9 @@ function stopWaitingToDrag() {
   }
 }
 
-function startDrag(mouseTop, mouseLeft) {
+function startDragging(mouseTop, mouseLeft) {
   const bounds = this.getBounds(),
-        eventType = START_DRAG,
+        eventType = START_DRAGGING,
         boundsTop = bounds.getTop(),
         boundsLeft = bounds.getLeft(),
         topOffset = mouseTop - boundsTop,
@@ -64,15 +129,11 @@ function startDrag(mouseTop, mouseLeft) {
 
   this.callHandlers(eventType, relativeMouseTop, relativeMouseLeft);
 
-  this.drag(mouseTop, mouseLeft);
+  this.dragging(mouseTop, mouseLeft);
 }
 
-function dragging(mouseTop, mouseLeft) {
-  this.drag(mouseTop, mouseLeft);
-}
-
-function stopDrag(mouseTop, mouseLeft) {
-  const eventType = STOP_DRAG,
+function stopDragging(mouseTop, mouseLeft) {
+  const eventType = STOP_DRAGGING,
         startMouseTop = this.getStartMouseTop(),
         startMouseLeft = this.getStartMouseLeft(),
         relativeMouseTop = mouseTop - startMouseTop,
@@ -83,8 +144,8 @@ function stopDrag(mouseTop, mouseLeft) {
   this.removeClass("dragging");
 }
 
-function drag(mouseTop, mouseLeft) {
-  const eventType = DRAG,
+function dragging(mouseTop, mouseLeft) {
+  const eventType = DRAGGING,
         topOffset = this.getTopOffset(),
         leftOffset = this.getLeftOffset(),
         startMouseTop = this.getStartMouseTop(),
@@ -108,48 +169,6 @@ function drag(mouseTop, mouseLeft) {
   this.callHandlers(eventType, relativeMouseTop, relativeMouseLeft);
 }
 
-function onDrag(dragHandler, element) {
-  const eventType = DRAG,
-        handler = dragHandler;  ///
-
-  this.addEventListener(eventType, handler, element);
-}
-
-function offDrag(dragHandler, element) {
-  const eventType = DRAG,
-        handler = dragHandler;  ///
-
-  this.removeEventListener(eventType, handler, element);
-}
-
-function onStopDrag(stopDragHandler, element) {
-  const eventType = STOP_DRAG,
-        handler = stopDragHandler;  ///
-
-  this.addEventListener(eventType, handler, element);
-}
-
-function offStopDrag(stopDragHandler, element) {
-  const eventType = STOP_DRAG,
-        handler = stopDragHandler;  ///
-
-  this.removeEventListener(eventType, handler, element);
-}
-
-function onStartDrag(startDragHandler, element) {
-  const eventType = START_DRAG,
-        handler = startDragHandler;  ///
-
-  this.addEventListener(eventType, handler, element);
-}
-
-function offStartDrag(startDragHandler, element) {
-  const eventType = START_DRAG,
-        handler = startDragHandler;  ///
-
-  this.removeEventListener(eventType, handler, element);
-}
-
 function callHandlers(eventType, relativeMouseTop, relativeMouseLeft) {
   const eventListeners = this.findEventListeners(eventType);
 
@@ -158,28 +177,6 @@ function callHandlers(eventType, relativeMouseTop, relativeMouseLeft) {
 
     handler.call(element, relativeMouseTop, relativeMouseLeft);
   });
-}
-
-function enableDragging() {
-  const timeout = null,
-        topOffset = null,
-        leftOffset = null,
-        startMouseTop = null,
-        startMouseLeft = null;
-
-  this.setState({
-    timeout,
-    topOffset,
-    leftOffset,
-    startMouseTop,
-    startMouseLeft
-  });
-
-  this.onMouseDown(mouseDownHandler, this);
-}
-
-function disableDragging() {
-  this.offMouseDown(mouseDownHandler, this);
 }
 
 function isMouseOver(mouseTop, mouseLeft) {
@@ -262,22 +259,21 @@ function setStartMouseLeft(startMouseLeft) {
 }
 
 export default {
+  onDragging,
+  offDragging,
+  onStopDragging,
+  offStopDragging,
+  onStartDragging,
+  offStartDragging,
+  enableDragging,
+  disableDragging,
   isDragging,
   startWaitingToDrag,
   stopWaitingToDrag,
-  startDrag,
+  startDragging,
+  stopDragging,
   dragging,
-  stopDrag,
-  drag,
-  onDrag,
-  offDrag,
-  onStopDrag,
-  offStopDrag,
-  onStartDrag,
-  offStartDrag,
   callHandlers,
-  enableDragging,
-  disableDragging,
   isMouseOver,
   resetTimeout,
   getTimeout,
@@ -292,22 +288,6 @@ export default {
   setStartMouseLeft
 };
 
-function mouseTopFromEvent(event) {
-  const { pageY } = event,
-        scrollTop = window.getScrollTop(),
-        mouseTop = pageY + scrollTop;
-
-  return mouseTop;
-}
-
-function mouseLeftFromEvent(event) {
-  const { pageX } = event,
-        scrollLeft = window.getScrollLeft(),
-        mouseLeft = pageX + scrollLeft;
-
-  return mouseLeft;
-}
-
 function mouseUpHandler(event, element) {
   window.off("blur", mouseUpHandler, this);  ///
 
@@ -321,7 +301,7 @@ function mouseUpHandler(event, element) {
     const mouseTop = mouseTopFromEvent(event),
           mouseLeft = mouseLeftFromEvent(event);
 
-    this.stopDrag(mouseTop, mouseLeft);
+    this.stopDragging(mouseTop, mouseLeft);
   } else {
     this.stopWaitingToDrag();
   }
