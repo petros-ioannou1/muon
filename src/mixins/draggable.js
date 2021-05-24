@@ -146,6 +146,8 @@ function stopDragging(mouseTop, mouseLeft) {
 
 function dragging(mouseTop, mouseLeft) {
   const eventType = DRAGGING,
+        scrollTop = window.getScrollTop(),
+        scrollLeft = window.getScrollLeft(),
         topOffset = this.getTopOffset(),
         leftOffset = this.getLeftOffset(),
         startMouseTop = this.getStartMouseTop(),
@@ -153,8 +155,8 @@ function dragging(mouseTop, mouseLeft) {
         relativeMouseTop = mouseTop - startMouseTop,
         relativeMouseLeft = mouseLeft - startMouseLeft;
 
-  let top = startMouseTop + relativeMouseTop - topOffset,
-      left = startMouseLeft + relativeMouseLeft - leftOffset ;
+  let top = startMouseTop + relativeMouseTop - topOffset - scrollTop,
+      left = startMouseLeft + relativeMouseLeft - leftOffset - scrollLeft;
 
   top = `${top}px`; ///
   left = `${left}px`; ///
