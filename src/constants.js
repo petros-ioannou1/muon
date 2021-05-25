@@ -5,6 +5,7 @@ export const TOP = "top";
 export const HALF = 1/2;
 export const LEFT = "left";
 export const DOWN = "down";
+export const BLUR = "blur";
 export const DRAGGING = "dragging";
 export const BOARD_SIZE = 8;
 export const STOP_DRAGGING = "stopdragging";

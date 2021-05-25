@@ -2,6 +2,7 @@
 
 import { window, constants } from "easy";
 
+import { BLUR } from "../constants";
 import { mouseTopFromEvent, mouseLeftFromEvent } from "../utilitites/event";
 import { DRAGGING, STOP_DRAGGING, START_DRAGGING, START_DRAG_DELAY } from "../constants";
 
@@ -291,7 +292,7 @@ export default {
 };
 
 function mouseUpHandler(event, element) {
-  window.off("blur", mouseUpHandler, this);  ///
+  window.off(BLUR, mouseUpHandler, this);  ///
 
   window.offMouseUp(mouseUpHandler, this);
 
@@ -312,7 +313,7 @@ function mouseUpHandler(event, element) {
 function mouseDownHandler(event, element) {
   const { button } = event;
 
-  window.on("blur", mouseUpHandler, this); ///
+  window.on(BLUR, mouseUpHandler, this); ///
 
   window.onMouseUp(mouseUpHandler, this);
 
