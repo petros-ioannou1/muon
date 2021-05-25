@@ -11,4 +11,4 @@ export const BOARD_SIZE = 8;
 export const STOP_DRAGGING = "stopdragging";
 export const START_DRAGGING = "startdragging";
 export const BOARD_INVERTED = false;
-export const START_DRAG_DELAY = 175;
+export const START_DRAGGING_DELAY = 175;

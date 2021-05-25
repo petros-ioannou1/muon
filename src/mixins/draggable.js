@@ -3,7 +3,7 @@
 import { window, constants } from "easy";
 
 import { mouseTopFromEvent, mouseLeftFromEvent } from "../utilitites/event";
-import { BLUR, DRAGGING, STOP_DRAGGING, START_DRAGGING, START_DRAG_DELAY } from "../constants";
+import { BLUR, DRAGGING, STOP_DRAGGING, START_DRAGGING, START_DRAGGING_DELAY } from "../constants";
 
 const { LEFT_MOUSE_BUTTON } = constants;
 
@@ -89,7 +89,7 @@ function startWaitingToDrag(mouseTop, mouseLeft) {
       if (mouseOver) {
         this.startDragging(mouseTop, mouseLeft);
       }
-    }, START_DRAG_DELAY);
+    }, START_DRAGGING_DELAY);
 
     this.updateTimeout(timeout);
   }
