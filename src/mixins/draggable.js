@@ -332,13 +332,12 @@ function mouseDownHandler(event, element) {
 }
 
 function mouseMoveHandler(event, element) {
-  const mouseTop = mouseTopFromEvent(event),
-        mouseLeft = mouseLeftFromEvent(event);
-
   const dragging = this.isDragging();
 
   if (dragging) {
+    const mouseTop = mouseTopFromEvent(event),
+          mouseLeft = mouseLeftFromEvent(event);
+
     this.dragging(mouseTop, mouseLeft);
   }
 }
-

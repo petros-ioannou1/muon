@@ -13,4 +13,3 @@ export function mouseLeftFromEvent(event) {
 
   return mouseLeft;
 }
-
