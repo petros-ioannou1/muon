@@ -190,17 +190,23 @@ function isMouseOver(mouseTop, mouseLeft) {
   return draggableMouseOver;
 }
 
+function getTimeout() {
+  const state = this.getState(),
+      { timeout } = state;
+
+  return timeout;
+}
+
 function resetTimeout() {
   const timeout = null;
 
   this.updateTimeout(timeout);
 }
 
-function getTimeout() {
-  const state = this.getState(),
-        { timeout } = state;
-
-  return timeout;
+function updateTimeout(timeout) {
+  this.updateState({
+    timeout
+  });
 }
 
 function getTopOffset() {
@@ -229,12 +235,6 @@ function getStartMouseLeft() {
         { startMouseLeft } = state;
 
   return startMouseLeft;
-}
-
-function updateTimeout(timeout) {
-  this.updateState({
-    timeout
-  });
 }
 
 function setTopOffset(topOffset) {
@@ -278,13 +278,13 @@ export default {
   dragging,
   callHandlers,
   isMouseOver,
-  resetTimeout,
   getTimeout,
+  resetTimeout,
+  updateTimeout,
   getTopOffset,
   getLeftOffset,
   getStartMouseTop,
   getStartMouseLeft,
-  updateTimeout,
   setTopOffset,
   setLeftOffset,
   setStartMouseTop,
