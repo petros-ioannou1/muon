@@ -2,9 +2,8 @@
 
 import { window, constants } from "easy";
 
-import { BLUR } from "../constants";
 import { mouseTopFromEvent, mouseLeftFromEvent } from "../utilitites/event";
-import { DRAGGING, STOP_DRAGGING, START_DRAGGING, START_DRAG_DELAY } from "../constants";
+import { BLUR, DRAGGING, STOP_DRAGGING, START_DRAGGING, START_DRAG_DELAY } from "../constants";
 
 const { LEFT_MOUSE_BUTTON } = constants;
 
@@ -85,9 +84,9 @@ function startWaitingToDrag(mouseTop, mouseLeft) {
     timeout = setTimeout(() => {
       this.resetTimeout();
 
-      const draggableMouseOver = this.isMouseOver(mouseTop, mouseLeft);
+      const mouseOver = this.isMouseOver(mouseTop, mouseLeft);
 
-      if (draggableMouseOver) {
+      if (mouseOver) {
         this.startDragging(mouseTop, mouseLeft);
       }
     }, START_DRAG_DELAY);
@@ -185,9 +184,9 @@ function callHandlers(eventType, relativeMouseTop, relativeMouseLeft) {
 function isMouseOver(mouseTop, mouseLeft) {
   const bounds = this.getBounds(),
         boundsOverlappingMouse = bounds.isOverlappingMouse(mouseTop, mouseLeft),
-        draggableMouseOver = boundsOverlappingMouse; ///
+        mouseOver = boundsOverlappingMouse;  ///
 
-  return draggableMouseOver;
+  return mouseOver;
 }
 
 function getTimeout() {
