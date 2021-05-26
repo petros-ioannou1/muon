@@ -7,7 +7,7 @@ import { Element } from "easy";
 import coordinatesMixins from "../../mixins/coordinates";
 
 import { squareDivWidth, squareDivHeight } from "../../styles";
-import { darkBrown, lightBrown, brightRed, lightGrey } from "../../colours";
+import { midGrey, darkBrown, lightBrown, brightRed } from "../../colours";
 
 class SquareDiv extends Element {
   constructor(selector, coordinates) {
@@ -103,16 +103,16 @@ export default withStyle(SquareDiv)`
   }
   
   .highlighted-move::after {
-    top: 20%;
-    left: 20%;
-    width: 60%;
-    height: 60%;
-    z-index: 2;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    z-index: 1;
     content: " ";
     opacity: 75%;
     position: absolute;
     border-radius: 50%;
-    background-color: ${lightGrey};
+    background-color: ${midGrey};
   }
   
 `;
