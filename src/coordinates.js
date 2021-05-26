@@ -49,4 +49,22 @@ export default class Coordinates {
 
     return coordinates;
   }
+
+  static fromDirection(direction) {
+    const { x, y } = direction,
+          coordinates = new Coordinates(x, y);
+
+    return coordinates;
+  }
+
+  static fromMagnitudeAndDirection(magnitude, direction) {
+    let { x, y } = direction;
+
+    x *= magnitude;
+    y *= magnitude;
+
+    const coordinates = new Coordinates(x, y);
+
+    return coordinates;
+  }
 }

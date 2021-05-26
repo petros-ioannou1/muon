@@ -24,7 +24,7 @@ export default class WhitePiecesDiv extends PiecesDiv {
 
   static PawnPieceDiv = WhitePawnPieceDiv;
 
-  static direction = UP;
+  static orientation = UP;
 
   static defaultProperties = {
     className: "white"

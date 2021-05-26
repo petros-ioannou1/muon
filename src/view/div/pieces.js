@@ -10,13 +10,13 @@ import { UP, BOARD_SIZE } from "../../constants";
 
 class PiecesDiv extends Element {
   childElements() {
-    const { MajorPieceDivs, PawnPieceDiv, direction } = this.constructor,
+    const { MajorPieceDivs, PawnPieceDiv, orientation } = this.constructor,
           pawnPieceDivs = [],
           majorPieceDivs = [];
 
     MajorPieceDivs.forEach((MajorPieceDiv, index) => {
       const offset = 0,
-            coordinates = coordinatesFromIndexOffsetAndDirection(index, offset, direction),
+            coordinates = coordinatesFromIndexOffsetAndDirection(index, offset, orientation),
             majorPieceDiv =
 
               <MajorPieceDiv coordinates={coordinates} />
@@ -28,7 +28,7 @@ class PiecesDiv extends Element {
 
     for (let index = 0; index < BOARD_SIZE; index++) {
       const offset = 1,
-            coordinates = coordinatesFromIndexOffsetAndDirection(index, offset, direction),
+            coordinates = coordinatesFromIndexOffsetAndDirection(index, offset, orientation),
             pawnPieceDiv =
 
               <PawnPieceDiv coordinates={coordinates} />
@@ -61,9 +61,9 @@ export default withStyle(PiecesDiv)`
       
 `;
 
-function coordinatesFromIndexOffsetAndDirection(index, offset, direction) {
+function coordinatesFromIndexOffsetAndDirection(index, offset, orientation) {
   const x = index,  ///
-        y = (direction === UP) ?
+        y = (orientation === UP) ?
               offset :
                 (BOARD_SIZE - offset - 1),
         coordinates = Coordinates.fromXAndY(x, y);

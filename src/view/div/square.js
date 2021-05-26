@@ -107,6 +107,7 @@ export default withStyle(SquareDiv)`
     left: 20%;
     width: 60%;
     height: 60%;
+    z-index: 2;
     content: " ";
     opacity: 75%;
     position: absolute;

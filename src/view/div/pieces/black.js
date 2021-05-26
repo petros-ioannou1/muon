@@ -24,7 +24,7 @@ export default class BlackPiecesDiv extends PiecesDiv {
           BlackRookPieceDiv
         ];
 
-  static direction = DOWN;
+  static orientation = DOWN;
 
   static defaultProperties = {
     className: "black"

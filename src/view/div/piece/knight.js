@@ -6,40 +6,41 @@ import Coordinates from "../../../coordinates";
 
 export default class KnightDiv extends PieceDiv {
   generateMoves() {
-    const moves = [];
+    const moves = [],
+          { directions, maximumMagnitude } = this.constructor;
 
-    relativeCoordinatesArray.forEach((relativeCoordinates) => {
-      const coordinates = this.coordinates.add(relativeCoordinates),
-            coordinatesValid = coordinates.areValid();
+    for (let magnitude = 1; magnitude <= maximumMagnitude; magnitude++) {
+      directions.forEach((direction) => {
+        const relativeCoordinates = Coordinates.fromMagnitudeAndDirection(magnitude, direction),
+              coordinates = this.coordinates.add(relativeCoordinates),
+              coordinatesValid = coordinates.areValid();
 
-      if (coordinatesValid) {
-        const pieceDiv = this,  ///
+        if (coordinatesValid) {
+          const pieceDiv = this,  ///
               move = Move.fromPieceDivAndCoordinates(pieceDiv, coordinates);
 
-        moves.push(move);
-      }
-    });
+          moves.push(move);
+        }
+      });
+    }
 
     return moves;
   }
+
+  static directions = [
+    { x: +1, y: +2 },
+    { x: +1, y: -2 },
+    { x: -1, y: +2 },
+    { x: -1, y: -2 },
+    { x: +2, y: +1 },
+    { x: +2, y: -1 },
+    { x: -2, y: +1 },
+    { x: -2, y: -1 }
+  ];
+
+  static maximumMagnitude = 1;
 
   static defaultProperties = {
     className: "knight"
   };
 }
-
-const relativeCoordinatesArray = [
-  { x: +1, y: +2 },
-  { x: +1, y: -2 },
-  { x: -1, y: +2 },
-  { x: -1, y: -2 },
-  { x: +2, y: +1 },
-  { x: +2, y: -1 },
-  { x: -2, y: +1 },
-  { x: -2, y: -1 }
-].map((json) => {
-  const { x, y } = json,
-        relativeCoordinates = Coordinates.fromXAndY(x, y);
-
-  return relativeCoordinates;
-});
