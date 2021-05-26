@@ -49,6 +49,8 @@ class PieceDiv extends Element {
       this.move(coordinates) :
         this.move(this.coordinates);
 
+    controller.unhighlightMoves();
+
     controller.unhighlightCoordinates();
   }
 
