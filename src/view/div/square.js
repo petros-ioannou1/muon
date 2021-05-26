@@ -7,7 +7,7 @@ import { Element } from "easy";
 import coordinatesMixins from "../../mixins/coordinates";
 
 import { squareDivWidth, squareDivHeight } from "../../styles";
-import { midGrey, darkBrown, lightBrown, brightRed } from "../../colours";
+import { midGrey, darkBrown, lightBrown, plainBlack } from "../../colours";
 
 class SquareDiv extends Element {
   constructor(selector, coordinates) {
@@ -99,7 +99,7 @@ export default withStyle(SquareDiv)`
   }
   
   .highlighted {
-    border: 4px solid ${brightRed};
+    border: 3px solid ${plainBlack};
   }
   
   .highlighted-move::after {
