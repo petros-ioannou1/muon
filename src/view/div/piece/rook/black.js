@@ -1,12 +1,12 @@
 "use strict";
 
-import PieceDiv from "../../../div/piece";
+import RookPieceDiv from "../../../div/piece/rook";
 import BlackRookSVG from "../../../svg/rook/black"
 
-export default class BlackRookDiv extends PieceDiv {
+export default class BlackRookPieceDiv extends RookPieceDiv {
   static SVG = BlackRookSVG;
 
   static defaultProperties = {
-    className: "black-rook"
+    className: "black"
   };
 }

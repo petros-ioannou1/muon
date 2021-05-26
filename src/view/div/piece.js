@@ -5,6 +5,8 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 import { controller } from "sufficient";
 
+import Move from "../../move";
+import Coordinates from "../../coordinates";
 import draggableMixins from "../../mixins/draggable";
 import coordinatesMixins from "../../mixins/coordinates";
 
@@ -61,7 +63,23 @@ class PieceDiv extends Element {
   }
 
   generateMoves() {
-    const moves = [];
+    const moves = [],
+          { directions, maximumMagnitude } = this.constructor;
+
+    for (let magnitude = 1; magnitude <= maximumMagnitude; magnitude++) {
+      directions.forEach((direction) => {
+        const relativeCoordinates = Coordinates.fromMagnitudeAndDirection(magnitude, direction),
+              coordinates = this.coordinates.add(relativeCoordinates),
+              coordinatesValid = coordinates.areValid();
+
+        if (coordinatesValid) {
+          const pieceDiv = this,  ///
+                move = Move.fromPieceDivAndCoordinates(pieceDiv, coordinates);
+
+          moves.push(move);
+        }
+      });
+    }
 
     return moves;
   }
