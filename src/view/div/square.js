@@ -103,10 +103,10 @@ export default withStyle(SquareDiv)`
   }
   
   .highlighted-move::after {
-    top: 25%;
-    left: 25%;
-    width: 50%;
-    height: 50%;
+    top: 33%;
+    left: 33%;
+    width: 33%;
+    height: 33%;
     z-index: 1;
     content: " ";
     opacity: 75%;

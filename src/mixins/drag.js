@@ -110,8 +110,12 @@ function startDragging(mouseTop, mouseLeft) {
         eventType = START_DRAGGING,
         boundsTop = bounds.getTop(),
         boundsLeft = bounds.getLeft(),
-        topOffset = mouseTop - boundsTop,
-        leftOffset = mouseLeft - boundsLeft,
+        boundsRight = bounds.getRight(),
+        boundsBottom = bounds.getBottom(),
+        boundsWidth = boundsRight - boundsLeft,
+        boundsHeight = boundsBottom - boundsTop,
+        topOffset = Math.floor(boundsWidth / 2),
+        leftOffset = Math.floor(boundsHeight / 2),
         startMouseTop = mouseTop, ///
         startMouseLeft = mouseLeft, ///
         relativeMouseTop = mouseTop - startMouseTop,
