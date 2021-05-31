@@ -35,7 +35,7 @@ class PieceDiv extends Element {
     this.coordinates = coordinates;
   }
 
-  draggingHandler(relativeMouseTop, relativeMouseLeft) {
+  dragHandler(relativeMouseTop, relativeMouseLeft) {
     const relativeMouseCoordinates = coordinatesFromTopAndLeft(relativeMouseTop, relativeMouseLeft),
           coordinates = this.coordinates.add(relativeMouseCoordinates),
           coordinatesValid = coordinates.areValid();
@@ -47,7 +47,7 @@ class PieceDiv extends Element {
     }
   }
 
-  stopDraggingHandler(relativeMouseTop, relativeMouseLeft) {
+  stopDragHandler(relativeMouseTop, relativeMouseLeft) {
     const relativeMouseCoordinates = coordinatesFromTopAndLeft(relativeMouseTop, relativeMouseLeft),
           coordinates = this.coordinates.add(relativeMouseCoordinates),
           coordinatesValid = coordinates.areValid();
@@ -104,21 +104,21 @@ class PieceDiv extends Element {
 
     this.onMouseOver(this.mouseOverHandler, this);
 
-    this.onDragging(this.draggingHandler, this);
+    this.onDrag(this.dragHandler, this);
 
-    this.onStopDragging(this.stopDraggingHandler, this);
+    this.onStopDrag(this.stopDragHandler, this);
 
-    this.enableDragging();
+    this.enableDrag();
 
     this.applyCoordinates(this.coordinates);
   }
 
   willUnmount() {
-    this.disableDragging();
+    this.disableDrag();
 
-    this.offDragging(this.draggingHandler, this);
+    this.offDrag(this.dragHandler, this);
 
-    this.offStopDragging(this.stopDraggingHandler, this);
+    this.offStopDrag(this.stopDragHandler, this);
 
     this.offMouseOver(this.mouseOverHandler, this);
 
@@ -159,7 +159,7 @@ export default withStyle(PieceDiv)`
   height: ${pieceDivHeight};
   position: absolute;
   
-  .dragging {
+  .drag {
     z-index: 1;
     position: fixed;
   }
