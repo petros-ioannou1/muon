@@ -1,7 +1,7 @@
 "use strict";
 
 import { TOP, LEFT } from "../constants";
-import { topFromY, leftFromX } from "../utilitites/coordinates";
+import { topFromY, leftFromX } from "../utilities/coordinates";
 
 function applyCoordinates(coordinates) {
   const x = coordinates.getX(),

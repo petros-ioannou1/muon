@@ -2,7 +2,7 @@
 
 import { window, constants } from "easy";
 
-import { mouseTopFromEvent, mouseLeftFromEvent } from "../utilitites/event";
+import { mouseTopFromEvent, mouseLeftFromEvent } from "../utilities/event";
 import { BLUR, DRAGGING, STOP_DRAGGING, START_DRAGGING, START_DRAGGING_DELAY } from "../constants";
 
 const { LEFT_MOUSE_BUTTON } = constants;
@@ -182,7 +182,7 @@ function callHandlers(eventType, relativeMouseTop, relativeMouseLeft) {
 }
 
 function isMouseOver(mouseTop, mouseLeft) {
-  const bounds = this.getBounds(),
+  const bounds = this.getCollapsedBounds(),
         boundsOverlappingMouse = bounds.isOverlappingMouse(mouseTop, mouseLeft),
         mouseOver = boundsOverlappingMouse;  ///
 
@@ -224,14 +224,14 @@ function getLeftOffset() {
 
 function getStartMouseTop() {
   const state = this.getState(),
-        { startMouseTop } = state;
+      { startMouseTop } = state;
 
   return startMouseTop;
 }
 
 function getStartMouseLeft() {
   const state = this.getState(),
-        { startMouseLeft } = state;
+      { startMouseLeft } = state;
 
   return startMouseLeft;
 }
@@ -300,10 +300,12 @@ function mouseUpHandler(event, element) {
   const dragging = this.isDragging();
 
   if (dragging) {
-    const mouseTop = mouseTopFromEvent(event),
-          mouseLeft = mouseLeftFromEvent(event);
+    const explorer = this.getExplorer(),
+          dragEntry = this;  ///
 
-    this.stopDragging(mouseTop, mouseLeft);
+    explorer.stopDragging(dragEntry, () => {
+      this.stopDragging();
+    });
   } else {
     this.stopWaitingToDrag();
   }

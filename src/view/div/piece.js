@@ -6,11 +6,11 @@ import { Element } from "easy";
 import { controller } from "sufficient";
 
 import Move from "../../move";
+import dragMixins from "../../mixins/drag";
 import Coordinates from "../../coordinates";
-import draggableMixins from "../../mixins/draggable";
 import coordinatesMixins from "../../mixins/coordinates";
 
-import { coordinatesFromTopAndLeft } from "../../utilitites/coordinates";
+import { coordinatesFromTopAndLeft } from "../../utilities/coordinates";
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
 class PieceDiv extends Element {
@@ -18,6 +18,13 @@ class PieceDiv extends Element {
     super(selector);
 
     this.coordinates = coordinates;
+  }
+
+  getCollapsedBounds() {
+    const bounds = this.getBounds(),
+          collapsedBounds = bounds;
+
+    return collapsedBounds;
   }
 
   getCoordinates() {
@@ -143,7 +150,7 @@ class PieceDiv extends Element {
   }
 }
 
-Object.assign(PieceDiv.prototype, draggableMixins);
+Object.assign(PieceDiv.prototype, dragMixins);
 Object.assign(PieceDiv.prototype, coordinatesMixins);
 
 export default withStyle(PieceDiv)`
