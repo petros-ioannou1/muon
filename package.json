@@ -25,8 +25,8 @@
   },
   "scripts": {
     "start": "node ./bin/main.js",
-    "clean": "rm -rf lib",
-    "watchful": "watchful -mp=4 --transpiler=swc --bundler=esbuild --source-directory=./src --lib-directory=./lib --entry-file=main.js --bundle-file=./client.js --pause=100",
+    "clean": "rm -rf tmp",
+    "watchful": "watchful -mp=4 --transpiler=swc --bundler=esbuild --source-directory=./src --temp-directory=./tmp --entry-file=main.js --bundle-file=./client.js --pause=100",
     "batch": "npm run watchful batch --",
     "batch-debug": "npm run watchful batch -- --debug",
     "incremental": "npm run watchful incremental --",
@@ -36,5 +36,5 @@
     "watch": "npm run clean && npm run batch && npm run incremental",
     "watch-debug": "npm run clean && npm run batch-debug && npm run incremental-debug"
   },
-  "main": "./lib/index.js"
+  "main": "tmp/index.js"
 }
