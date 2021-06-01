@@ -120,8 +120,8 @@ function startDrag(mouseTop, mouseLeft) {
         boundsBottom = bounds.getBottom(),
         boundsWidth = boundsRight - boundsLeft,
         boundsHeight = boundsBottom - boundsTop,
-        topOffset = Math.floor(boundsWidth / 2),
-        leftOffset = Math.floor(boundsHeight / 2),
+        topOffset = Math.floor(boundsHeight / 2),
+        leftOffset = Math.floor(boundsWidth / 2),
         dragElement = this, ///
         startMouseTop = mouseTop, ///
         startMouseLeft = mouseLeft, ///
