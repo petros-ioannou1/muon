@@ -19,8 +19,6 @@ class View extends Element {
   }
 
   initialise() {
-    debugger
-
     this.assignContext();
   }
 

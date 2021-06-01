@@ -35,18 +35,6 @@ class PieceDiv extends Element {
     this.coordinates = coordinates;
   }
 
-  dragHandler(relativeMouseTop, relativeMouseLeft) {
-    const relativeMouseCoordinates = coordinatesFromTopAndLeft(relativeMouseTop, relativeMouseLeft),
-          coordinates = this.coordinates.add(relativeMouseCoordinates),
-          coordinatesValid = coordinates.areValid();
-
-    controller.unhighlightCoordinates();
-
-    if (coordinatesValid) {
-      controller.highlightCoordinates(coordinates);
-    }
-  }
-
   stopDragHandler(relativeMouseTop, relativeMouseLeft) {
     const relativeMouseCoordinates = coordinatesFromTopAndLeft(relativeMouseTop, relativeMouseLeft),
           coordinates = this.coordinates.add(relativeMouseCoordinates),
@@ -57,8 +45,6 @@ class PieceDiv extends Element {
         this.move(this.coordinates);
 
     controller.unhighlightMoves();
-
-    controller.unhighlightCoordinates();
 
     controller.enablePieceDivsPointerEvents();
   }
@@ -116,8 +102,6 @@ class PieceDiv extends Element {
   didMount() {
     this.enableDrag();
 
-    this.onDrag(this.dragHandler, this);
-
     this.onStopDrag(this.stopDragHandler, this);
 
     this.onStartDrag(this.startDragHandler, this);
@@ -131,8 +115,6 @@ class PieceDiv extends Element {
 
   willUnmount() {
     this.disableDrag();
-
-    this.offDrag(this.dragHandler, this);
 
     this.offStopDrag(this.stopDragHandler, this);
 

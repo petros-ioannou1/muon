@@ -92,27 +92,6 @@ class SquaresDiv extends Element {
     this.setMoveHighlightedSquareDivs(moveHighlightedSquareDivs);
   }
 
-  highlightCoordinates(coordinates) {
-    const squareDiv = this.findSquareDiv(coordinates),
-          highlightedSquareDiv = squareDiv; ///
-
-    highlightedSquareDiv.highlight();
-
-    this.setHighlightedSquareDiv(highlightedSquareDiv);
-  }
-
-  unhighlightCoordinates() {
-    let highlightedSquareDiv = this.getHighlightedSquareDiv();
-
-    if (highlightedSquareDiv !== null) {
-      highlightedSquareDiv.unhighlight();
-
-      highlightedSquareDiv = null;
-
-      this.setHighlightedSquareDiv(highlightedSquareDiv);
-    }
-  }
-
   childElements() {
     const squareDivs = [];
 
@@ -138,13 +117,9 @@ class SquaresDiv extends Element {
     const context = this.getContext(),
           highlightMoves = this.highlightMoves.bind(this),
           unhighlightMoves = this.unhighlightMoves.bind(this),
-          highlightCoordinates = this.highlightCoordinates.bind(this),
-          unhighlightCoordinates = this.unhighlightCoordinates.bind(this),
           parentContext = Object.assign({}, context, {
             highlightMoves,
-            unhighlightMoves,
-            highlightCoordinates,
-            unhighlightCoordinates
+            unhighlightMoves
           });
 
     return parentContext;

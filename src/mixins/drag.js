@@ -148,7 +148,8 @@ function startDrag(mouseTop, mouseLeft) {
 }
 
 function stopDrag(mouseTop, mouseLeft) {
-  const eventType = STOP_DRAG,
+  const { dropElement } = globalThis,
+        eventType = STOP_DRAG,
         dragElement = null, ///
         startMouseTop = this.getStartMouseTop(),
         startMouseLeft = this.getStartMouseLeft(),
@@ -160,6 +161,12 @@ function stopDrag(mouseTop, mouseLeft) {
   Object.assign(globalThis, {
     dragElement
   });
+
+  if (dropElement !== null) {
+    const dragElement = this; ///
+
+    dropElement.drop(dragElement)
+  }
 
   this.removeClass("drag");
 }

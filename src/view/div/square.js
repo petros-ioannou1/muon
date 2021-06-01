@@ -27,6 +27,18 @@ class SquareDiv extends Element {
     return matchesCoordinates;
   }
 
+  dragOverHandler(dragElement) {
+    this.highlight();
+  }
+
+  dragOutHandler(dragElement) {
+    this.unhighlight();
+  }
+
+  dropHandler(dragElement) {
+    this.unhighlight();
+  }
+
   highlight() {
     this.addClass("highlighted");
   }
@@ -52,13 +64,25 @@ class SquareDiv extends Element {
       this.addClass("black") :
         this.addClass("white");
 
-    this.applyCoordinates(this.coordinates);
-
     this.enableDrop();
+
+    this.onDrop(this.dropHandler, this);
+
+    this.onDragOut(this.dragOutHandler, this);
+
+    this.onDragOver(this.dragOverHandler, this);
+
+    this.applyCoordinates(this.coordinates);
   }
 
   willUnmount() {
     this.disableDrop();
+
+    this.offDrop(this.dropHandler, this);
+
+    this.offDragOut(this.dragOutHandler, this);
+
+    this.offDragOver(this.dragOverHandler, this);
   }
 
   parentContext() {
