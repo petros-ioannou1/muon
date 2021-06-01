@@ -165,14 +165,6 @@ class SquaresDiv extends Element {
   static defaultProperties = {
     className: "squares"
   };
-  
-  static fromClass(Class, properties) {
-    const squareDiv = Element.fromClass(Class, properties);
-
-    squareDiv.initialise();
-
-    return squareDiv;
-  }
 }
 
 export default withStyle(SquaresDiv)`

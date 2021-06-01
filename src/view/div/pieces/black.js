@@ -11,6 +11,16 @@ import BlackKnightPieceDiv from "../../div/piece/knight/black"
 import { DOWN } from "../../../constants";
 
 export default class BlackPiecesDiv extends PiecesDiv {
+  parentContext() {
+    const enableBlackPieceDivsPointerEvents = this.enablePieceDivsPointerEvents.bind(this),
+          disableBlackPieceDivsPointerEvents = this.disablePieceDivsPointerEvents.bind(this);
+
+    return ({
+      enableBlackPieceDivsPointerEvents,
+      disableBlackPieceDivsPointerEvents
+    });
+  }
+
   static PawnPieceDiv = BlackPawnPieceDiv;
 
   static MajorPieceDivs = [

@@ -4,6 +4,7 @@ import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
 
+import dropMixins from "../../mixins/drop";
 import coordinatesMixins from "../../mixins/coordinates";
 
 import { squareDivWidth, squareDivHeight } from "../../styles";
@@ -52,10 +53,12 @@ class SquareDiv extends Element {
         this.addClass("white");
 
     this.applyCoordinates(this.coordinates);
+
+    this.enableDrop();
   }
 
   willUnmount() {
-    ///
+    this.disableDrop();
   }
 
   parentContext() {
@@ -82,6 +85,7 @@ class SquareDiv extends Element {
   }
 }
 
+Object.assign(SquareDiv.prototype, dropMixins);
 Object.assign(SquareDiv.prototype, coordinatesMixins);
 
 export default withStyle(SquareDiv)`

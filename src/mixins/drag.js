@@ -7,6 +7,12 @@ import { BLUR, DRAG, STOP_DRAG, START_DRAG, START_DRAG_DELAY } from "../constant
 
 const { LEFT_MOUSE_BUTTON } = constants;
 
+const dragElement = null;
+
+Object.assign(globalThis, {
+  dragElement
+});
+
 function onDrag(dragHandler, element) {
   const eventType = DRAG,
         handler = dragHandler;  ///
@@ -116,12 +122,17 @@ function startDrag(mouseTop, mouseLeft) {
         boundsHeight = boundsBottom - boundsTop,
         topOffset = Math.floor(boundsWidth / 2),
         leftOffset = Math.floor(boundsHeight / 2),
+        dragElement = this, ///
         startMouseTop = mouseTop, ///
         startMouseLeft = mouseLeft, ///
         relativeMouseTop = mouseTop - startMouseTop,
         relativeMouseLeft = mouseLeft - startMouseLeft;
 
   this.addClass("drag");
+
+  Object.assign(globalThis, {
+    dragElement
+  });
 
   this.setTopOffset(topOffset);
 
@@ -138,12 +149,17 @@ function startDrag(mouseTop, mouseLeft) {
 
 function stopDrag(mouseTop, mouseLeft) {
   const eventType = STOP_DRAG,
+        dragElement = null, ///
         startMouseTop = this.getStartMouseTop(),
         startMouseLeft = this.getStartMouseLeft(),
         relativeMouseTop = mouseTop - startMouseTop,
         relativeMouseLeft = mouseLeft - startMouseLeft;
 
   this.callHandlers(eventType, relativeMouseTop, relativeMouseLeft);
+
+  Object.assign(globalThis, {
+    dragElement
+  });
 
   this.removeClass("drag");
 }
@@ -195,7 +211,7 @@ function isMouseOver(mouseTop, mouseLeft) {
 
 function getTimeout() {
   const state = this.getState(),
-      { timeout } = state;
+        { timeout } = state;
 
   return timeout;
 }

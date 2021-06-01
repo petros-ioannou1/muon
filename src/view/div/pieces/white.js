@@ -11,6 +11,16 @@ import WhiteKnightPieceDiv from "../../div/piece/knight/white";
 import { UP } from "../../../constants";
 
 export default class WhitePiecesDiv extends PiecesDiv {
+  parentContext() {
+    const enableWhitePieceDivsPointerEvents = this.enablePieceDivsPointerEvents.bind(this),
+          disableWhitePieceDivsPointerEvents = this.disablePieceDivsPointerEvents.bind(this);
+
+    return ({
+      enableWhitePieceDivsPointerEvents,
+      disableWhitePieceDivsPointerEvents
+    });
+  }
+
   static MajorPieceDivs = [
     WhiteRookPieceDiv,
     WhiteKnightPieceDiv,

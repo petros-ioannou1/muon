@@ -59,6 +59,12 @@ class PieceDiv extends Element {
     controller.unhighlightMoves();
 
     controller.unhighlightCoordinates();
+
+    controller.enablePieceDivsPointerEvents();
+  }
+
+  startDragHandler(relativeMouseTop, relativeMouseLeft) {
+    controller.disablePieceDivsPointerEvents();
   }
 
   mouseOutHandler(event, element) {
@@ -69,6 +75,14 @@ class PieceDiv extends Element {
     const moves = this.generateMoves();
 
     controller.highlightMoves(moves);
+  }
+
+  enablePointerEvents() {
+    this.removeClass("no-pointer-events");
+  }
+
+  disablePointerEvents() {
+    this.addClass("no-pointer-events");
   }
 
   generateMoves() {
@@ -100,15 +114,17 @@ class PieceDiv extends Element {
   }
 
   didMount() {
-    this.onMouseOut(this.mouseOutHandler, this);
-
-    this.onMouseOver(this.mouseOverHandler, this);
+    this.enableDrag();
 
     this.onDrag(this.dragHandler, this);
 
     this.onStopDrag(this.stopDragHandler, this);
 
-    this.enableDrag();
+    this.onStartDrag(this.startDragHandler, this);
+
+    this.onMouseOut(this.mouseOutHandler, this);
+
+    this.onMouseOver(this.mouseOverHandler, this);
 
     this.applyCoordinates(this.coordinates);
   }
@@ -120,10 +136,11 @@ class PieceDiv extends Element {
 
     this.offStopDrag(this.stopDragHandler, this);
 
+    this.offStartDrag(this.startDragHandler, this);
+
     this.offMouseOver(this.mouseOverHandler, this);
 
     this.offMouseOut(this.mouseOutHandler, this);
-
   }
 
   childElements() {
@@ -162,6 +179,10 @@ export default withStyle(PieceDiv)`
   .drag {
     z-index: 1;
     position: fixed;
+  }
+  
+  .no-pointer-events {
+    pointer-events: none;
   }
 
 `;

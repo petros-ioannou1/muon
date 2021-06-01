@@ -9,6 +9,27 @@ import Coordinates from "../../coordinates";
 import { UP, BOARD_SIZE } from "../../constants";
 
 class PiecesDiv extends Element {
+  enablePieceDivsPointerEvents() {
+    this.forEachPieceDiv((pieceDiv) => pieceDiv.enablePointerEvents());
+  }
+
+  disablePieceDivsPointerEvents() {
+    this.forEachPieceDiv((pieceDiv) => pieceDiv.disablePointerEvents());
+  }
+
+  getPieceDivs() {
+    const childElements = this.getChildElements(),
+          pieceDivs = childElements;  ///
+
+    return pieceDivs;
+  }
+
+  forEachPieceDiv(callback) {
+    const pieceDivs = this.getPieceDivs();
+
+    pieceDivs.forEach(callback);
+  }
+
   childElements() {
     const { MajorPieceDivs, PawnPieceDiv, orientation } = this.constructor,
           pawnPieceDivs = [],

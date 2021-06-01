@@ -7,6 +7,7 @@ export const LEFT = "left";
 export const DOWN = "down";
 export const BLUR = "blur";
 export const DRAG = "drag";
+export const DROP = "drop";
 export const BOARD_SIZE = 8;
 export const STOP_DRAG = "stopdrag";
 export const START_DRAG = "startdrag";

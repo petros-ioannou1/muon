@@ -29,12 +29,22 @@ export default function createMethods(scheduler, model, view) {
     view.unhighlightCoordinates(coordinates);
   }
 
+  function enablePieceDivsPointerEvents() {
+    view.enablePieceDivsPointerEvents();
+  }
+
+  function disablePieceDivsPointerEvents() {
+    view.disablePieceDivsPointerEvents();
+  }
+
   return ({
     highlightMoves,
     unhighlightMoves,
     getSquareDivWidth,
     getSquareDivHeight,
     highlightCoordinates,
-    unhighlightCoordinates
+    unhighlightCoordinates,
+    enablePieceDivsPointerEvents,
+    disablePieceDivsPointerEvents
   });
 }
