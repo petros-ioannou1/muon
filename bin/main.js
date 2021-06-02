@@ -12,4 +12,4 @@ server.use(staticRouter);
 
 server.get("/live-reload", liveReloadHandler);
 
-server.listen(9999);
+server.listen(8888);
