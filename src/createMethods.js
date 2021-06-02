@@ -9,6 +9,12 @@ export default function createMethods(scheduler, model, view) {
     view.unhighlightMoves();
   }
 
+  function isSquareOccupied(coordinates) {
+    const squareOccupied = view.isSquareOccupied(coordinates);
+
+    return squareOccupied;
+  }
+
   function getSquareDivWidth() {
     const squareDivWidth = view.getSquareDivWidth();
 
@@ -32,6 +38,7 @@ export default function createMethods(scheduler, model, view) {
   return ({
     highlightMoves,
     unhighlightMoves,
+    isSquareOccupied,
     getSquareDivWidth,
     getSquareDivHeight,
     enablePieceDivsPointerEvents,

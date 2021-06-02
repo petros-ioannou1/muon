@@ -9,14 +9,6 @@ import Coordinates from "../../coordinates";
 import { UP, BOARD_SIZE } from "../../constants";
 
 class PiecesDiv extends Element {
-  enablePieceDivsPointerEvents() {
-    this.forEachPieceDiv((pieceDiv) => pieceDiv.enablePointerEvents());
-  }
-
-  disablePieceDivsPointerEvents() {
-    this.forEachPieceDiv((pieceDiv) => pieceDiv.disablePointerEvents());
-  }
-
   getPieceDivs() {
     const childElements = this.getChildElements(),
           pieceDivs = childElements;  ///
@@ -24,10 +16,38 @@ class PiecesDiv extends Element {
     return pieceDivs;
   }
 
+  somePieceDiv(callback) {
+    const pieceDivs = this.getPieceDivs(),
+          result = pieceDivs.some(callback);
+
+    return result;
+  }
+
   forEachPieceDiv(callback) {
     const pieceDivs = this.getPieceDivs();
 
     pieceDivs.forEach(callback);
+  }
+
+  isSquareOccupied(coordinates) {
+    const squareOccupied = this.somePieceDiv((pieceDiv) => {
+      const pieceDivCoordinates = pieceDiv.getCoordinates(),
+            pieceDivCoordinatesEqualToCoordinates = pieceDivCoordinates.areEqualTo(coordinates);
+
+      if (pieceDivCoordinatesEqualToCoordinates) {
+        return true;
+      }
+    });
+
+    return squareOccupied;
+  }
+
+  enablePieceDivsPointerEvents() {
+    this.forEachPieceDiv((pieceDiv) => pieceDiv.enablePointerEvents());
+  }
+
+  disablePieceDivsPointerEvents() {
+    this.forEachPieceDiv((pieceDiv) => pieceDiv.disablePointerEvents());
   }
 
   childElements() {

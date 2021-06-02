@@ -24,6 +24,14 @@ export default class Coordinates {
     return valid;
   }
 
+  areEqualTo(coordinates) {
+    const x = coordinates.getX(),
+          y = coordinates.getY(),
+          equalTo = (this.x === x) && (this.y === y);
+
+    return equalTo;
+  }
+
   add(coordinates) {
     let x = coordinates.getX(),
         y = coordinates.getY();
