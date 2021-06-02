@@ -1,18 +1,18 @@
 "use strict";
 
 export default function createMethods(scheduler, model, view) {
+  function isPiecePresent(coordinates) {
+    const piecePresent = view.isPiecePresent(coordinates);
+
+    return piecePresent;
+  }
+
   function highlightMoves(moves) {
     view.highlightMoves(moves);
   }
 
   function unhighlightMoves() {
     view.unhighlightMoves();
-  }
-
-  function isSquareOccupied(coordinates) {
-    const squareOccupied = view.isSquareOccupied(coordinates);
-
-    return squareOccupied;
   }
 
   function getSquareDivWidth() {
@@ -36,9 +36,9 @@ export default function createMethods(scheduler, model, view) {
   }
 
   return ({
+    isPiecePresent,
     highlightMoves,
     unhighlightMoves,
-    isSquareOccupied,
     getSquareDivWidth,
     getSquareDivHeight,
     enablePieceDivsPointerEvents,

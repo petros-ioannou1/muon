@@ -75,26 +75,26 @@ class PieceDiv extends Element {
     const moves = [],
           { directions, maximumMagnitude } = this.constructor;
 
-    for (let magnitude = 1; magnitude <= maximumMagnitude; magnitude++) {
-      directions.some((direction) => {
+    directions.forEach((direction) => {
+      for (let magnitude = 1; magnitude <= maximumMagnitude; magnitude++) {
         const relativeCoordinates = Coordinates.fromMagnitudeAndDirection(magnitude, direction),
               coordinates = this.coordinates.add(relativeCoordinates),
               coordinatesValid = coordinates.areValid();
 
         if (coordinatesValid) {
+          const piecePresent = controller.isPiecePresent(coordinates);
+
+          if (piecePresent) {
+            break;
+          }
+
           const pieceDiv = this,  ///
                 move = Move.fromPieceDivAndCoordinates(pieceDiv, coordinates);
 
           moves.push(move);
-
-          const squareOccupied = controller.isSquareOccupied(coordinates);
-
-          if (squareOccupied) {
-            return true;
-          }
         }
-      });
-    }
+      }
+    });
 
     return moves;
   }

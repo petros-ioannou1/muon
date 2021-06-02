@@ -29,8 +29,8 @@ class PiecesDiv extends Element {
     pieceDivs.forEach(callback);
   }
 
-  isSquareOccupied(coordinates) {
-    const squareOccupied = this.somePieceDiv((pieceDiv) => {
+  isPiecePresent(coordinates) {
+    const piecePresent = this.somePieceDiv((pieceDiv) => {
       const pieceDivCoordinates = pieceDiv.getCoordinates(),
             pieceDivCoordinatesEqualToCoordinates = pieceDivCoordinates.areEqualTo(coordinates);
 
@@ -39,7 +39,7 @@ class PiecesDiv extends Element {
       }
     });
 
-    return squareOccupied;
+    return piecePresent;
   }
 
   enablePieceDivsPointerEvents() {

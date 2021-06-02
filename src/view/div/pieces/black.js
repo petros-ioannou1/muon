@@ -12,12 +12,12 @@ import { DOWN } from "../../../constants";
 
 export default class BlackPiecesDiv extends PiecesDiv {
   parentContext() {
-    const isSquareOccupied = this.isSquareOccupied.bind(this),
+    const isPiecePresent = this.isPiecePresent.bind(this),
           enableBlackPieceDivsPointerEvents = this.enablePieceDivsPointerEvents.bind(this),
           disableBlackPieceDivsPointerEvents = this.disablePieceDivsPointerEvents.bind(this);
 
     return ({
-      isSquareOccupied,
+      isPiecePresent,
       enableBlackPieceDivsPointerEvents,
       disableBlackPieceDivsPointerEvents
     });
