@@ -31,6 +31,12 @@ class PieceDiv extends Element {
     return this.coordinates;
   }
 
+  getColour() {
+    const { colour } = this.constructor;
+
+    return colour;
+  }
+
   setCoordinates(coordinates) {
     this.coordinates = coordinates;
   }
