@@ -8,9 +8,8 @@ export default class PawnDiv extends PieceDiv {
   generateMoves() {
     const moves = [],
           magnitude = 1,
-          { direction } = this.constructor;
-
-    const relativeCoordinates = Coordinates.fromMagnitudeAndDirection(magnitude, direction),
+          { direction } = this.constructor,
+          relativeCoordinates = Coordinates.fromMagnitudeAndDirection(magnitude, direction),
           coordinates = this.coordinates.add(relativeCoordinates),
           coordinatesValid = coordinates.areValid();
 

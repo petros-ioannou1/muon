@@ -9,6 +9,7 @@ import Move from "../../move";
 import dragMixins from "../../mixins/drag";
 import Coordinates from "../../coordinates";
 import coordinatesMixins from "../../mixins/coordinates";
+import PieceBackgroundDiv from "../div/pieceBackground";
 
 import { BLACK, WHITE } from "../../constants";
 import { coordinatesFromTopAndLeft } from "../../utilities/coordinates";
@@ -185,11 +186,12 @@ class PieceDiv extends Element {
   childElements() {
     const { SVG } = this.constructor;
 
-    return (
+    return ([
 
-      <SVG/>
+      <SVG/>,
+      <PieceBackgroundDiv/>
 
-    );
+    ]);
   }
 
   static tagName = "div";
