@@ -48,9 +48,24 @@ class PieceDiv extends Element {
           coordinates = this.coordinates.add(relativeMouseCoordinates),
           coordinatesValid = coordinates.areValid();
 
-    coordinatesValid ?
+    let moveValid = false;
+
+    if (coordinatesValid) {
+      const moves = this.generateMoves();
+
+      moveValid = moves.some((move) => {
+        const moveCoordinates = move.getCoordinates(),
+              moveCoordinatesEqualToCoordinates = moveCoordinates.areEqualTo(coordinates);
+
+        if (moveCoordinatesEqualToCoordinates) {
+          return true;
+        }
+      });
+    }
+
+    moveValid ?
       this.move(coordinates) :
-        this.move(this.coordinates);
+        this.applyCoordinates(this.coordinates);
 
     controller.unhighlightMoves();
 
@@ -159,6 +174,19 @@ class PieceDiv extends Element {
     this.coordinates = coordinates;
 
     this.applyCoordinates(this.coordinates);
+  }
+
+  setMoves(moves) {
+    this.updateState({
+      moves
+    });
+  }
+
+  getMoves() {
+    const state = this.getState(),
+          { moves } = state;
+
+    return moves;
   }
 
   didMount() {
