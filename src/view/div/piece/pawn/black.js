@@ -10,6 +10,8 @@ export default class BlackPawnPieceDiv extends PawnPieceDiv {
 
   static colour = BLACK;
 
+  static direction = { x: 0, y: -1 };
+
   static defaultProperties = {
     className: "black"
   };
