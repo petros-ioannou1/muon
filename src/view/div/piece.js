@@ -62,7 +62,11 @@ class PieceDiv extends Element {
   }
 
   mouseOutHandler(event, element) {
-    controller.unhighlightMoves();
+    const drag = this.isDrag();
+
+    if (!drag) {
+      controller.unhighlightMoves();
+    }
   }
 
   mouseOverHandler(event, element) {
