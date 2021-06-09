@@ -10,6 +10,7 @@ import dragMixins from "../../mixins/drag";
 import Coordinates from "../../coordinates";
 import coordinatesMixins from "../../mixins/coordinates";
 
+import { BLACK, WHITE } from "../../constants";
 import { coordinatesFromTopAndLeft } from "../../utilities/coordinates";
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
@@ -77,6 +78,43 @@ class PieceDiv extends Element {
     this.addClass("no-pointer-events");
   }
 
+  findPieceDiv(coordinates, opposing) {
+    let findPieceDiv;
+
+    const { colour } = this.constructor;
+
+    switch (colour) {
+      case BLACK :
+        findPieceDiv = opposing ?
+                         controller.findWhitePieceDiv :
+                           controller.findBlackPieceDiv;
+        break;
+      case WHITE :
+        findPieceDiv = opposing ?
+                         controller.findBlackPieceDiv :
+                           controller.findWhitePieceDiv;
+        break;
+    }
+
+    const pieceDiv = findPieceDiv((pieceDiv) => {
+      const pieceDivCoordinates = pieceDiv.getCoordinates(),
+            pieceDivCoordinatesEqualToCoordinates = pieceDivCoordinates.areEqualTo(coordinates);
+
+      if (pieceDivCoordinatesEqualToCoordinates) {
+        return true;
+      }
+    });
+
+    return pieceDiv;
+  }
+
+  isPiecePresent(coordinates, opposing = false) {
+    const pieceDiv = this.findPieceDiv(coordinates, opposing),
+          pieceDivPresent = (pieceDiv !== null);
+
+    return pieceDivPresent;
+  }
+
   generateMoves() {
     const moves = [],
           { directions, maximumMagnitude } = this.constructor;
@@ -88,9 +126,9 @@ class PieceDiv extends Element {
               coordinatesValid = coordinates.areValid();
 
         if (coordinatesValid) {
-          const piecePresent = controller.isPiecePresent(coordinates);
+          const pieceDivPresent = this.isPiecePresent(coordinates);
 
-          if (piecePresent) {
+          if (pieceDivPresent) {
             break;
           }
 
@@ -98,6 +136,13 @@ class PieceDiv extends Element {
                 move = Move.fromPieceDivAndCoordinates(pieceDiv, coordinates);
 
           moves.push(move);
+
+          const opposing = true,
+                opposingPieceDivPresent = this.isPiecePresent(coordinates, opposing);
+
+          if (opposingPieceDivPresent) {
+            break;
+          }
         }
       }
     });

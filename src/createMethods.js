@@ -1,12 +1,6 @@
 "use strict";
 
 export default function createMethods(scheduler, model, view) {
-  function isPiecePresent(coordinates) {
-    const piecePresent = view.isPiecePresent(coordinates);
-
-    return piecePresent;
-  }
-
   function highlightMoves(moves) {
     view.highlightMoves(moves);
   }
@@ -27,6 +21,18 @@ export default function createMethods(scheduler, model, view) {
     return squareDivHeight;
   }
 
+  function findWhitePieceDiv(callback) {
+    const piecePresent = view.findWhitePieceDiv(callback);
+
+    return piecePresent;
+  }
+
+  function findBlackPieceDiv(callback) {
+    const piecePresent = view.findBlackPieceDiv(callback);
+
+    return piecePresent;
+  }
+
   function enablePieceDivsPointerEvents() {
     view.enablePieceDivsPointerEvents();
   }
@@ -36,11 +42,12 @@ export default function createMethods(scheduler, model, view) {
   }
 
   return ({
-    isPiecePresent,
     highlightMoves,
     unhighlightMoves,
     getSquareDivWidth,
     getSquareDivHeight,
+    findWhitePieceDiv,
+    findBlackPieceDiv,
     enablePieceDivsPointerEvents,
     disablePieceDivsPointerEvents
   });

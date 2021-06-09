@@ -12,14 +12,18 @@ import { UP } from "../../../constants";
 
 export default class WhitePiecesDiv extends PiecesDiv {
   parentContext() {
-    const enableWhitePieceDivsPointerEvents = this.enablePieceDivsPointerEvents.bind(this),
+    const findWhitePieceDiv = this.findPieceDiv.bind(this),
+          enableWhitePieceDivsPointerEvents = this.enablePieceDivsPointerEvents.bind(this),
           disableWhitePieceDivsPointerEvents = this.disablePieceDivsPointerEvents.bind(this);
 
     return ({
+      findWhitePieceDiv,
       enableWhitePieceDivsPointerEvents,
       disableWhitePieceDivsPointerEvents
     });
   }
+
+  static PawnPieceDiv = WhitePawnPieceDiv;
 
   static MajorPieceDivs = [
     WhiteRookPieceDiv,
@@ -31,8 +35,6 @@ export default class WhitePiecesDiv extends PiecesDiv {
     WhiteKnightPieceDiv,
     WhiteRookPieceDiv
   ];
-
-  static PawnPieceDiv = WhitePawnPieceDiv;
 
   static orientation = UP;
 

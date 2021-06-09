@@ -16,30 +16,17 @@ class PiecesDiv extends Element {
     return pieceDivs;
   }
 
-  somePieceDiv(callback) {
+  findPieceDiv(callback) {
     const pieceDivs = this.getPieceDivs(),
-          result = pieceDivs.some(callback);
+          pieceDiv = pieceDivs.find(callback) || null; ///
 
-    return result;
+    return pieceDiv;
   }
 
   forEachPieceDiv(callback) {
     const pieceDivs = this.getPieceDivs();
 
     pieceDivs.forEach(callback);
-  }
-
-  isPiecePresent(coordinates) {
-    const piecePresent = this.somePieceDiv((pieceDiv) => {
-      const pieceDivCoordinates = pieceDiv.getCoordinates(),
-            pieceDivCoordinatesEqualToCoordinates = pieceDivCoordinates.areEqualTo(coordinates);
-
-      if (pieceDivCoordinatesEqualToCoordinates) {
-        return true;
-      }
-    });
-
-    return piecePresent;
   }
 
   enablePieceDivsPointerEvents() {
