@@ -248,6 +248,7 @@ export default withStyle(PieceDiv)`
   width: ${pieceDivWidth};
   height: ${pieceDivHeight};
   position: absolute;
+  user-select: none;
   
   .drag {
     z-index: 1;
