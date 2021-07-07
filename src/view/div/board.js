@@ -10,30 +10,8 @@ import BlackPiecesDiv from "../div/pieces/black";
 import WhitePiecesDiv from "../div/pieces/white";
 
 class BoardDiv extends Element {
-  enablePieceDivsPointerEvents() {
-    this.enableBlackPieceDivsPointerEvents();
-    this.enableWhitePieceDivsPointerEvents();
-  }
-
-  disablePieceDivsPointerEvents() {
-    this.disableBlackPieceDivsPointerEvents();
-    this.disableWhitePieceDivsPointerEvents();
-  }
-
   isInverted() {
     return this.inverted;
-  }
-
-  parentContext() {
-    const context = this.getContext(),
-          enablePieceDivsPointerEvents = this.enablePieceDivsPointerEvents.bind(this),
-          disablePieceDivsPointerEvents = this.disablePieceDivsPointerEvents.bind(this),
-          parentContext = Object.assign({}, context, {
-            enablePieceDivsPointerEvents,
-            disablePieceDivsPointerEvents
-          });
-
-    return parentContext;
   }
 
   childElements() {
@@ -44,15 +22,6 @@ class BoardDiv extends Element {
       <WhitePiecesDiv/>,
       <BlackPiecesDiv/>
 
-    ]);
-  }
-
-  initialise() {
-    this.assignContext([
-      "enableBlackPieceDivsPointerEvents",
-      "enableWhitePieceDivsPointerEvents",
-      "disableBlackPieceDivsPointerEvents",
-      "disableWhitePieceDivsPointerEvents"
     ]);
   }
 

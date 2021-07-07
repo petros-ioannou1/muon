@@ -12,14 +12,10 @@ import { UP } from "../../../constants";
 
 export default class WhitePiecesDiv extends PiecesDiv {
   parentContext() {
-    const findWhitePieceDiv = this.findPieceDiv.bind(this),
-          enableWhitePieceDivsPointerEvents = this.enablePieceDivsPointerEvents.bind(this),
-          disableWhitePieceDivsPointerEvents = this.disablePieceDivsPointerEvents.bind(this);
+    const findWhitePieceDiv = this.findPieceDiv.bind(this);
 
     return ({
-      findWhitePieceDiv,
-      enableWhitePieceDivsPointerEvents,
-      disableWhitePieceDivsPointerEvents
+      findWhitePieceDiv
     });
   }
 

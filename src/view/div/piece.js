@@ -4,15 +4,14 @@ import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
 import { controller } from "sufficient";
+import { dragMixins } from "@djalbat/easy-drag-and-drop";
 
 import Move from "../../move";
-import dragMixins from "../../mixins/drag";
 import Coordinates from "../../coordinates";
 import coordinatesMixins from "../../mixins/coordinates";
 import PieceBackgroundDiv from "../div/pieceBackground";
 
 import { BLACK, WHITE } from "../../constants";
-import { coordinatesFromTopAndLeft } from "../../utilities/coordinates";
 import { pieceDivWidth, pieceDivHeight } from "../../styles";
 
 class PieceDiv extends Element {
@@ -43,43 +42,22 @@ class PieceDiv extends Element {
     this.coordinates = coordinates;
   }
 
-  stopDragHandler(relativeMouseTop, relativeMouseLeft) {
-    const relativeMouseCoordinates = coordinatesFromTopAndLeft(relativeMouseTop, relativeMouseLeft),
-          coordinates = this.coordinates.add(relativeMouseCoordinates),
-          coordinatesValid = coordinates.areValid();
+  stopDragHandler(element) {
+    this.applyCoordinates(this.coordinates);
 
-    let moveValid = false;
-
-    if (coordinatesValid) {
-      const moves = this.generateMoves();
-
-      moveValid = moves.some((move) => {
-        const moveCoordinates = move.getCoordinates(),
-              moveCoordinatesEqualToCoordinates = moveCoordinates.areEqualTo(coordinates);
-
-        if (moveCoordinatesEqualToCoordinates) {
-          return true;
-        }
-      });
-    }
-
-    moveValid ?
-      this.move(coordinates) :
-        this.applyCoordinates(this.coordinates);
+    controller.enableHighlightedMoves();
 
     controller.unhighlightMoves();
-
-    controller.enablePieceDivsPointerEvents();
   }
 
-  startDragHandler(relativeMouseTop, relativeMouseLeft) {
-    controller.disablePieceDivsPointerEvents();
+  startDragHandler(element) {
+    controller.disableHighlightedMoves();
   }
 
   mouseOutHandler(event, element) {
-    const drag = this.isDrag();
+    const dragging = this.isDragging();
 
-    if (!drag) {
+    if (!dragging) {
       controller.unhighlightMoves();
     }
   }
@@ -250,13 +228,10 @@ export default withStyle(PieceDiv)`
   position: absolute;
   user-select: none;
   
-  .drag {
+  .dragging {
     z-index: 1;
     position: fixed;
-  }
-  
-  .no-pointer-events {
     pointer-events: none;
   }
-
+  
 `;

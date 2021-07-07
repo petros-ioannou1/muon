@@ -1,12 +1,18 @@
 "use strict";
 
+let highlightedMoves = true;
+
 export default function createMethods(scheduler, model, view) {
   function highlightMoves(moves) {
-    view.highlightMoves(moves);
+    if (highlightedMoves) {
+      view.highlightMoves(moves);
+    }
   }
 
   function unhighlightMoves() {
-    view.unhighlightMoves();
+    if (highlightedMoves) {
+      view.unhighlightMoves();
+    }
   }
 
   function getSquareDivWidth() {
@@ -33,12 +39,12 @@ export default function createMethods(scheduler, model, view) {
     return piecePresent;
   }
 
-  function enablePieceDivsPointerEvents() {
-    view.enablePieceDivsPointerEvents();
+  function enableHighlightedMoves() {
+    highlightedMoves = true;
   }
 
-  function disablePieceDivsPointerEvents() {
-    view.disablePieceDivsPointerEvents();
+  function disableHighlightedMoves() {
+    highlightedMoves = false;
   }
 
   return ({
@@ -48,7 +54,7 @@ export default function createMethods(scheduler, model, view) {
     getSquareDivHeight,
     findWhitePieceDiv,
     findBlackPieceDiv,
-    enablePieceDivsPointerEvents,
-    disablePieceDivsPointerEvents
+    enableHighlightedMoves,
+    disableHighlightedMoves
   });
 }

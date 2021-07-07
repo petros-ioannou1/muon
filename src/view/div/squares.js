@@ -44,22 +44,14 @@ class SquaresDiv extends Element {
   }
 
   findSquareDiv(coordinates) {
-    let foundSquareDiv = null;
+    const squareDivs = this.getSquareDivs(),
+          squareDiv = squareDivs.find((squareDiv) => {
+            const squareDivMatchesCoordinates = squareDiv.matchCoordinates(coordinates);
 
-    const squareDivs = this.getSquareDivs();
-
-    squareDivs.some((squareDiv) => {
-      const squareDivMatchesCoordinates = squareDiv.matchCoordinates(coordinates),
-            found = squareDivMatchesCoordinates; ///
-
-      if (found) {
-        foundSquareDiv = squareDiv; ///
-
-        return true;
-      }
-    });
-
-    const squareDiv = foundSquareDiv; ///
+            if (squareDivMatchesCoordinates) {
+              return true;
+            }
+          }) || null; ///
 
     return squareDiv;
   }

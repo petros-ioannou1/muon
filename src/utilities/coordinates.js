@@ -40,11 +40,3 @@ export function topFromY(y) {
 
   return top;
 }
-
-export function coordinatesFromTopAndLeft(top, left) {
-  const y = yFromTop(top),
-        x = xFromLeft(left),
-        coordinates = Coordinates.fromXAndY(x, y);
-
-  return coordinates;
-}

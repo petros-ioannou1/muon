@@ -10,6 +10,7 @@
     "url": "https://github.com/petros-ioannou1/muon"
   },
   "dependencies": {
+    "@djalbat/easy-drag-and-drop": "0.0.3",
     "argumentative": "^2.0.15",
     "express": "^4.17.1",
     "lively-cli": "^2.0.7"

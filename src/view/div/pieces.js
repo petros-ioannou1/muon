@@ -29,14 +29,6 @@ class PiecesDiv extends Element {
     pieceDivs.forEach(callback);
   }
 
-  enablePieceDivsPointerEvents() {
-    this.forEachPieceDiv((pieceDiv) => pieceDiv.enablePointerEvents());
-  }
-
-  disablePieceDivsPointerEvents() {
-    this.forEachPieceDiv((pieceDiv) => pieceDiv.disablePointerEvents());
-  }
-
   childElements() {
     const { MajorPieceDivs, PawnPieceDiv, orientation } = this.constructor,
           pawnPieceDivs = [],
