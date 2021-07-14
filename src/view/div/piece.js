@@ -21,65 +21,18 @@ class PieceDiv extends Element {
     this.coordinates = coordinates;
   }
 
-  getCollapsedBounds() {
-    const bounds = this.getBounds(),
-          collapsedBounds = bounds;
-
-    return collapsedBounds;
-  }
-
-  getCoordinates() {
-    return this.coordinates;
-  }
-
   getColour() {
     const { colour } = this.constructor;
 
     return colour;
   }
 
+  getCoordinates() {
+    return this.coordinates;
+  }
+
   setCoordinates(coordinates) {
     this.coordinates = coordinates;
-  }
-
-  areCoordinatesEqualToMoveCoordinates(coordinates) {
-    const moves = this.generateMoves(),
-          coordinatesEqualToMoveCoordinates = moves.some((move) => {
-            const moveCoordinates = move.getCoordinates(),
-                  coordinatesEqualToMoveCoordinates = coordinates.areEqualTo(moveCoordinates);
-
-            if (coordinatesEqualToMoveCoordinates) {
-              return true;
-            }
-          });
-
-    return coordinatesEqualToMoveCoordinates;
-  }
-
-  stopDragHandler(element) {
-    this.applyCoordinates(this.coordinates);
-
-    controller.enableHighlightedMoves();
-
-    controller.unhighlightMoves();
-  }
-
-  startDragHandler(element) {
-    controller.disableHighlightedMoves();
-  }
-
-  mouseOutHandler(event, element) {
-    const dragging = this.isDragging();
-
-    if (!dragging) {
-      controller.unhighlightMoves();
-    }
-  }
-
-  mouseOverHandler(event, element) {
-    const moves = this.generateMoves();
-
-    controller.highlightMoves(moves);
   }
 
   findPieceDiv(coordinates, opposing) {
@@ -117,6 +70,20 @@ class PieceDiv extends Element {
           pieceDivPresent = (pieceDiv !== null);
 
     return pieceDivPresent;
+  }
+
+  areCoordinatesEqualToMoveCoordinates(coordinates) {
+    const moves = this.generateMoves(),
+          coordinatesEqualToMoveCoordinates = moves.some((move) => {
+            const moveCoordinates = move.getCoordinates(),
+                  coordinatesEqualToMoveCoordinates = coordinates.areEqualTo(moveCoordinates);
+
+            if (coordinatesEqualToMoveCoordinates) {
+              return true;
+            }
+          });
+
+    return coordinatesEqualToMoveCoordinates;
   }
 
   generateMoves() {
@@ -160,17 +127,30 @@ class PieceDiv extends Element {
     this.applyCoordinates(this.coordinates);
   }
 
-  setMoves(moves) {
-    this.updateState({
-      moves
-    });
+  stopDragHandler(element) {
+    this.applyCoordinates(this.coordinates);
+
+    controller.enableHighlightedMoves();
+
+    controller.unhighlightMoves();
   }
 
-  getMoves() {
-    const state = this.getState(),
-          { moves } = state;
+  startDragHandler(element) {
+    controller.disableHighlightedMoves();
+  }
 
-    return moves;
+  mouseOutHandler(event, element) {
+    const dragging = this.isDragging();
+
+    if (!dragging) {
+      controller.unhighlightMoves();
+    }
+  }
+
+  mouseOverHandler(event, element) {
+    const moves = this.generateMoves();
+
+    controller.highlightMoves(moves);
   }
 
   didMount() {
