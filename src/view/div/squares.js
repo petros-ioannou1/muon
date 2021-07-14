@@ -92,7 +92,7 @@ class SquaresDiv extends Element {
         const coordinates = Coordinates.fromXAndY(x, y),
               squareDiv =
 
-                <SquareDiv coordinates={coordinates}/>
+                <SquareDiv coordinates={coordinates} />
 
               ;
 
@@ -100,9 +100,7 @@ class SquaresDiv extends Element {
       }
     }
 
-    const childElements = squareDivs; ///
-
-    return childElements;
+    return ([ ...squareDivs ]);
   }
 
   parentContext() {

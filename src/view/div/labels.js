@@ -18,33 +18,29 @@ class LabelsDiv extends Element {
       const x = BOARD_INVERTED ?
                   BOARD_SIZE :
                     -1,
-            coordinates = Coordinates.fromXAndY(x, y),
-            rankLabelDiv =
+            coordinates = Coordinates.fromXAndY(x, y);
 
-              <RankLabelDiv coordinates={coordinates}/>
+      labelDivs.push(
 
-            ;
+        <RankLabelDiv coordinates={coordinates} />
 
-      labelDivs.push(rankLabelDiv);
+      );
     }
 
     for (let x = 0; x < BOARD_SIZE; x++) {
       const y = BOARD_INVERTED ?
                   BOARD_SIZE :
                     -1,
-            coordinates = Coordinates.fromXAndY(x, y),
-            fileLabelDiv =
+            coordinates = Coordinates.fromXAndY(x, y);
 
-              <FileLabelDiv coordinates={coordinates}/>
+      labelDivs.push(
 
-            ;
+        <FileLabelDiv coordinates={coordinates} />
 
-      labelDivs.push(fileLabelDiv);
+      );
     }
 
-    const childElements = labelDivs; ///
-
-    return childElements;
+    return ([ ...labelDivs ]);
   }
 
   static tagName = "div";

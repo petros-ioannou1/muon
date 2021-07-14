@@ -36,34 +36,30 @@ class PiecesDiv extends Element {
 
     MajorPieceDivs.forEach((MajorPieceDiv, index) => {
       const offset = 0,
-            coordinates = coordinatesFromIndexOffsetAndDirection(index, offset, orientation),
-            majorPieceDiv =
+            coordinates = coordinatesFromIndexOffsetAndDirection(index, offset, orientation);
 
-              <MajorPieceDiv coordinates={coordinates} />
+      majorPieceDivs.push(
 
-            ;
+        <MajorPieceDiv coordinates={coordinates} />
 
-      majorPieceDivs.push(majorPieceDiv);
+      );
     });
 
     for (let index = 0; index < BOARD_SIZE; index++) {
       const offset = 1,
-            coordinates = coordinatesFromIndexOffsetAndDirection(index, offset, orientation),
-            pawnPieceDiv =
+            coordinates = coordinatesFromIndexOffsetAndDirection(index, offset, orientation);
 
-              <PawnPieceDiv coordinates={coordinates} />
+      pawnPieceDivs.push(
 
-            ;
+        <PawnPieceDiv coordinates={coordinates} />
 
-      pawnPieceDivs.push(pawnPieceDiv);
+      );
     }
 
-    const childElements = [
+    return ([
       ...pawnPieceDivs,
       ...majorPieceDivs
-    ];
-
-    return childElements;
+    ]);
   }
 
   static tagName = "div";
