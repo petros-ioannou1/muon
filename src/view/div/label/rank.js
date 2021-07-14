@@ -4,14 +4,14 @@ import LabelDiv from "../../div/label";
 
 export default class RankLabelDiv extends LabelDiv {
   didMount() {
-    const { coordinates } = this.properties,
+    const { coordinates, inverted } = this.properties,
           y = coordinates.getY(),
           rank = rankFromY(y),
-          html = rank;
+          html = rank;  ///
 
     this.html(html);
 
-    this.applyCoordinates(coordinates);
+    this.applyCoordinates(coordinates, inverted);
   }
 
   willUnmount() {

@@ -2,7 +2,6 @@
 
 export const UP = "up";
 export const TOP = "top";
-export const HALF = 1/2;
 export const LEFT = "left";
 export const DOWN = "down";
 export const BLACK = "black";

@@ -30,9 +30,10 @@ class PiecesDiv extends Element {
   }
 
   childElements() {
-    const { MajorPieceDivs, PawnPieceDiv, orientation } = this.constructor,
-          pawnPieceDivs = [],
-          majorPieceDivs = [];
+    const pawnPieceDivs = [],
+          majorPieceDivs = [],
+          { inverted } = this.properties,
+          { MajorPieceDivs, PawnPieceDiv, orientation } = this.constructor;
 
     MajorPieceDivs.forEach((MajorPieceDiv, index) => {
       const offset = 0,
@@ -40,7 +41,7 @@ class PiecesDiv extends Element {
 
       majorPieceDivs.push(
 
-        <MajorPieceDiv coordinates={coordinates} />
+        <MajorPieceDiv coordinates={coordinates} inverted={inverted} />
 
       );
     });
@@ -51,7 +52,7 @@ class PiecesDiv extends Element {
 
       pawnPieceDivs.push(
 
-        <PawnPieceDiv coordinates={coordinates} />
+        <PawnPieceDiv coordinates={coordinates} inverted={inverted} />
 
       );
     }

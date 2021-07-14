@@ -10,22 +10,24 @@ import BlackPiecesDiv from "../div/pieces/black";
 import WhitePiecesDiv from "../div/pieces/white";
 
 class BoardSection extends Element {
-  isInverted() {
-    return this.inverted;
-  }
-
   childElements() {
+    const { inverted } = this.properties;
+
     return ([
 
-      <LabelsDiv/>,
-      <SquaresDiv/>,
-      <WhitePiecesDiv/>,
-      <BlackPiecesDiv/>
+      <LabelsDiv inverted={inverted} />,
+      <SquaresDiv inverted={inverted} />,
+      <WhitePiecesDiv inverted={inverted} />,
+      <BlackPiecesDiv inverted={inverted} />
 
     ]);
   }
 
   static tagName = "section";
+
+  static ignoredProperties = [
+    "inverted"
+  ];
 
   static defaultProperties = {
     className: "board"

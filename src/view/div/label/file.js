@@ -4,14 +4,14 @@ import LabelDiv from "../../div/label";
 
 export default class FileLabelDiv extends LabelDiv {
   didMount() {
-    const { coordinates } = this.properties,
+    const { coordinates, inverted } = this.properties,
           x = coordinates.getX(),
           file = fileFromX(x),
-          html = file;
+          html = file;  ///
 
     this.html(html);
 
-    this.applyCoordinates(coordinates);
+    this.applyCoordinates(coordinates, inverted);
   }
 
   willUnmount() {

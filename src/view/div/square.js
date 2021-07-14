@@ -63,7 +63,8 @@ class SquareDiv extends Element {
   }
 
   didMount() {
-    const x = this.coordinates.getX(),
+    const { inverted } = this.properties,
+          x = this.coordinates.getX(),
           y = this.coordinates.getY(),
           black = ((x + y) % 2) === 0;
 
@@ -79,7 +80,7 @@ class SquareDiv extends Element {
 
     this.onDragOver(this.dragOverHandler, this);
 
-    this.applyCoordinates(this.coordinates);
+    this.applyCoordinates(this.coordinates, inverted);
   }
 
   willUnmount() {

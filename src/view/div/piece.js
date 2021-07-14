@@ -122,13 +122,17 @@ class PieceDiv extends Element {
   }
 
   move(coordinates) {
+    const { inverted } = this.properties;
+
     this.coordinates = coordinates;
 
-    this.applyCoordinates(this.coordinates);
+    this.applyCoordinates(this.coordinates, inverted);
   }
 
   stopDragHandler(element) {
-    this.applyCoordinates(this.coordinates);
+    const { inverted } = this.properties;
+
+    this.applyCoordinates(this.coordinates, inverted);
 
     controller.enableHighlightedMoves();
 
@@ -154,6 +158,8 @@ class PieceDiv extends Element {
   }
 
   didMount() {
+    const { inverted } = this.properties;
+
     this.enableDrag();
 
     this.onStopDrag(this.stopDragHandler, this);
@@ -164,7 +170,7 @@ class PieceDiv extends Element {
 
     this.onMouseOver(this.mouseOverHandler, this);
 
-    this.applyCoordinates(this.coordinates);
+    this.applyCoordinates(this.coordinates, inverted);
   }
 
   willUnmount() {

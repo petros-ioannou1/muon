@@ -85,14 +85,15 @@ class SquaresDiv extends Element {
   }
 
   childElements() {
-    const squareDivs = [];
+    const squareDivs = [],
+          { inverted } = this.properties;
 
     for (let y = 0; y < BOARD_SIZE; y++) {
       for (let x = 0; x < BOARD_SIZE; x++) {
         const coordinates = Coordinates.fromXAndY(x, y),
               squareDiv =
 
-                <SquareDiv coordinates={coordinates} />
+                <SquareDiv coordinates={coordinates} inverted={inverted} />
 
               ;
 

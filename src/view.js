@@ -7,13 +7,16 @@ import { Element } from "easy";
 import BoardSection from "./view/section/board";
 
 import { lightGrey } from "./colours";
+import { BOARD_INVERTED } from "./constants";
 import { boardSectionWidth, boardSectionHeight } from "./styles";
 
 class View extends Element {
   childElements() {
+    const inverted = BOARD_INVERTED;
+
     return ([
 
-      <BoardSection/>
+      <BoardSection inverted={inverted} />
 
     ]);
   }

@@ -15,18 +15,6 @@ export default function createMethods(scheduler, model, view) {
     }
   }
 
-  function getSquareDivWidth() {
-    const squareDivWidth = view.getSquareDivWidth();
-
-    return squareDivWidth;
-  }
-
-  function getSquareDivHeight() {
-    const squareDivHeight = view.getSquareDivHeight();
-
-    return squareDivHeight;
-  }
-
   function findWhitePieceDiv(callback) {
     const piecePresent = view.findWhitePieceDiv(callback);
 
@@ -37,6 +25,18 @@ export default function createMethods(scheduler, model, view) {
     const piecePresent = view.findBlackPieceDiv(callback);
 
     return piecePresent;
+  }
+
+  function getSquareDivWidth() {
+    const squareDivWidth = view.getSquareDivWidth();
+
+    return squareDivWidth;
+  }
+
+  function getSquareDivHeight() {
+    const squareDivHeight = view.getSquareDivHeight();
+
+    return squareDivHeight;
   }
 
   function enableHighlightedMoves() {
@@ -50,10 +50,10 @@ export default function createMethods(scheduler, model, view) {
   return ({
     highlightMoves,
     unhighlightMoves,
-    getSquareDivWidth,
-    getSquareDivHeight,
     findWhitePieceDiv,
     findBlackPieceDiv,
+    getSquareDivWidth,
+    getSquareDivHeight,
     enableHighlightedMoves,
     disableHighlightedMoves
   });

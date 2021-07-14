@@ -1,13 +1,13 @@
 "use strict";
 
 import { TOP, LEFT } from "../constants";
-import { topFromY, leftFromX } from "../utilities/coordinates";
+import { topFromYAndInverted, leftFromXAndInverted } from "../utilities/coordinates";
 
-function applyCoordinates(coordinates) {
+function applyCoordinates(coordinates, inverted) {
   const x = coordinates.getX(),
         y = coordinates.getY(),
-        top = topFromY(y),
-        left = leftFromX(x);
+        top = topFromYAndInverted(y, inverted),
+        left = leftFromXAndInverted(x, inverted);
 
   this.style(TOP, top);
   this.style(LEFT, left);
