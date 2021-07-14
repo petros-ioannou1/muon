@@ -82,14 +82,6 @@ class PieceDiv extends Element {
     controller.highlightMoves(moves);
   }
 
-  enablePointerEvents() {
-    this.removeClass("no-pointer-events");
-  }
-
-  disablePointerEvents() {
-    this.addClass("no-pointer-events");
-  }
-
   findPieceDiv(coordinates, opposing) {
     let findPieceDiv;
 
