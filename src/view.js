@@ -4,7 +4,7 @@ import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
 
-import BoardDiv from "./view/div/board";
+import BoardSection from "./view/section/board";
 
 import { lightGrey } from "./colours";
 import { boardDivWidth, boardDivHeight } from "./styles";
@@ -13,7 +13,7 @@ class View extends Element {
   childElements() {
     return ([
 
-      <BoardDiv/>
+      <BoardSection/>
 
     ]);
   }
@@ -41,7 +41,7 @@ export default withStyle(View)`
   
            ". . ."
     
-        ". board-div ."        
+     ". board-section ."        
     
            ". . ."
     

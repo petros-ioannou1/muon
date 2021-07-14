@@ -9,7 +9,7 @@ import SquaresDiv from "../div/squares";
 import BlackPiecesDiv from "../div/pieces/black";
 import WhitePiecesDiv from "../div/pieces/white";
 
-class BoardDiv extends Element {
+class BoardSection extends Element {
   isInverted() {
     return this.inverted;
   }
@@ -25,17 +25,17 @@ class BoardDiv extends Element {
     ]);
   }
 
-  static tagName = "div";
+  static tagName = "section";
 
   static defaultProperties = {
     className: "board"
   };
 }
 
-export default withStyle(BoardDiv)`
+export default withStyle(BoardSection)`
 
   overflow: visible;
   position: relative;
-  grid-area: board-div;
+  grid-area: board-section;
       
 `;
