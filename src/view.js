@@ -7,7 +7,7 @@ import { Element } from "easy";
 import BoardSection from "./view/section/board";
 
 import { lightGrey } from "./colours";
-import { boardDivWidth, boardDivHeight } from "./styles";
+import { boardSectionWidth, boardSectionHeight } from "./styles";
 
 class View extends Element {
   childElements() {
@@ -35,8 +35,8 @@ export default withStyle(View)`
   min-height: 100vh;
   background-color: ${lightGrey};
       
-  grid-template-rows: auto ${boardDivWidth} auto;
-  grid-template-columns: auto ${boardDivHeight} auto;  
+  grid-template-rows: auto ${boardSectionWidth} auto;
+  grid-template-columns: auto ${boardSectionHeight} auto;  
   grid-template-areas:
   
            ". . ."
