@@ -42,6 +42,20 @@ class PieceDiv extends Element {
     this.coordinates = coordinates;
   }
 
+  areCoordinatesEqualToMoveCoordinates(coordinates) {
+    const moves = this.generateMoves(),
+          coordinatesEqualToMoveCoordinates = moves.some((move) => {
+            const moveCoordinates = move.getCoordinates(),
+                  coordinatesEqualToMoveCoordinates = coordinates.areEqualTo(moveCoordinates);
+
+            if (coordinatesEqualToMoveCoordinates) {
+              return true;
+            }
+          });
+
+    return coordinatesEqualToMoveCoordinates;
+  }
+
   stopDragHandler(element) {
     this.applyCoordinates(this.coordinates);
 
