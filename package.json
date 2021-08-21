@@ -1,7 +1,7 @@
 {
   "name": "muon",
   "author": "Petros Ioannou",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/petros-ioannou1/muon",
   "description": "Muon.",
@@ -23,7 +23,7 @@
     "juxtapose": "^4.0.7",
     "necessary": "^7.1.10",
     "sufficient": "^2.0.6",
-    "watchful-cli": "^1.7.3"
+    "watchful-cli": "^1.7.6"
   },
   "scripts": {
     "start": "node ./bin/main.js",
