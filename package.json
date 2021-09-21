@@ -1,7 +1,7 @@
 {
   "name": "muon",
   "author": "Petros Ioannou",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/petros-ioannou1/muon",
   "description": "Muon.",
@@ -10,20 +10,19 @@
     "url": "https://github.com/petros-ioannou1/muon"
   },
   "dependencies": {
-    "@djalbat/easy-drag-and-drop": "1.0.20",
-    "argumentative": "^2.0.15",
-    "express": "^4.17.1",
-    "lively-cli": "^2.0.14"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@swc/core": "^1.2.51",
-    "easy": "^12.1.5",
+    "easy": "^12.1.16",
+    "easy-drag-and-drop": "^1.0.37",
     "easy-with-style": "^3.0.59",
-    "esbuild": "^0.11.2",
-    "juxtapose": "^4.0.15",
-    "necessary": "^7.1.10",
-    "sufficient": "^2.0.6",
-    "watchful-cli": "^1.7.6"
+    "esbuild": "^0.12.28",
+    "juxtapose": "^4.0.21",
+    "lively-cli": "^2.0.15",
+    "necessary": "^7.3.4",
+    "sufficient": "^2.0.10",
+    "watchful-cli": "^1.7.10"
   },
   "scripts": {
     "start": "node ./bin/main.js",
