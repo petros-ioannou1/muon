@@ -4,7 +4,7 @@ import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
 import { controller } from "sufficient";
-import { dragMixins } from "@djalbat/easy-drag-and-drop";
+import { dragMixins } from "easy-drag-and-drop";
 
 import Move from "../../move";
 import Coordinates from "../../coordinates";

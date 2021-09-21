@@ -3,7 +3,7 @@
 import withStyle from "easy-with-style";  ///
 
 import { Element } from "easy";
-import { dropMixins } from "@djalbat/easy-drag-and-drop";
+import { dropMixins } from "easy-drag-and-drop";
 
 import coordinatesMixins from "../../mixins/coordinates";
 
@@ -35,7 +35,7 @@ class SquareDiv extends Element {
     this.unhighlight();
   }
 
-  dropHandler(dragElement, element) {
+  dropHandler(dragElement, element, done) {
     const pieceDiv = dragElement, ///
           coordinatesEqualToMoveCoordinates = pieceDiv.areCoordinatesEqualToMoveCoordinates(this.coordinates);
 
@@ -44,6 +44,8 @@ class SquareDiv extends Element {
     }
 
     this.unhighlight();
+
+    done();
   }
 
   highlight() {
