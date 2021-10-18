@@ -129,7 +129,7 @@ class PieceDiv extends Element {
     this.applyCoordinates(this.coordinates, inverted);
   }
 
-  stopDragHandler(element) {
+  stopDragHandler(dropElement, aborted, element, done) {
     const { inverted } = this.properties;
 
     this.applyCoordinates(this.coordinates, inverted);
@@ -137,6 +137,8 @@ class PieceDiv extends Element {
     controller.enableHighlightedMoves();
 
     controller.unhighlightMoves();
+
+    done();
   }
 
   startDragHandler(element) {

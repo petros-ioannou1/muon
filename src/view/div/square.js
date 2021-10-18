@@ -35,7 +35,7 @@ class SquareDiv extends Element {
     this.unhighlight();
   }
 
-  dropHandler(dragElement, element, done) {
+  dropHandler(dragElement, aborted, element, done) {
     const pieceDiv = dragElement, ///
           coordinatesEqualToMoveCoordinates = pieceDiv.areCoordinatesEqualToMoveCoordinates(this.coordinates);
 
