@@ -130,6 +130,12 @@ class PieceDiv extends Element {
   }
 
   stopDragHandler(dropElement, aborted, element, done) {
+    if (dropElement !== null) {
+      done();
+
+      return;
+    }
+
     const { inverted } = this.properties;
 
     this.applyCoordinates(this.coordinates, inverted);
