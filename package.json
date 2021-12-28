@@ -1,7 +1,7 @@
 {
   "name": "muon",
   "author": "Petros Ioannou",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/petros-ioannou1/muon",
   "description": "Muon.",
@@ -15,8 +15,8 @@
   "devDependencies": {
     "@swc/core": "^1.2.51",
     "easy": "^13.0.18",
-    "easy-drag-and-drop": "^1.2.22",
-    "easy-with-style": "^3.0.83",
+    "easy-drag-and-drop": "^1.2.23",
+    "easy-with-style": "^3.0.86",
     "esbuild": "^0.12.28",
     "juxtapose": "^4.0.33",
     "lively-cli": "^2.0.19",
